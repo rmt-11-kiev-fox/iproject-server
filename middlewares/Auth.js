@@ -13,7 +13,7 @@ function Authentication(req, res, next) {
             }
         })
         .then((user) =>{
-            if(!user) {
+            if (!user) {
                 next({ 
                     status: 401,
                     message: 'Please Login First'
@@ -46,7 +46,7 @@ function Authorization(req, res, next) {
         }
     })
     .then((data) =>{
-        if(!data) {
+        if (!data) {
             next ({
                 status: 404,
                 message: "Data Not Found"
@@ -67,4 +67,42 @@ function Authorization(req, res, next) {
     })
 }
 
-module.exports = { Authentication, Authorization }
+
+function checkToken(req, res, next){
+    const access_token = req.headers.access_token
+
+    if (!access_token) {
+        req.loggedUser = {
+            id: null
+        }
+        next()
+    } else {
+        const decode = verify(access_token)
+        User.findOne({
+            where :{
+                username: decode.username,
+                email: decode.email
+            }
+        })
+        .then((user) =>{
+            if (!user) {
+                next({ 
+                    status: 401,
+                    message: 'Invalid Token'
+                })
+            } else {
+                req.loggedUser = {
+                    id: decode.id,
+                    username: decode.username,
+                    email: decode.email
+                }
+                next()
+            }
+        })
+        .catch((err) => {
+            next(err)
+        })
+    }
+}
+
+module.exports = { Authentication, Authorization, checkToken }

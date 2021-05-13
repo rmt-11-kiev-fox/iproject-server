@@ -11,14 +11,14 @@ class UserController {
             email: email || '',
             password: password || ''
         })
-        .then(({ id, username, email }) =>{
+        .then(({ id, username, email }) => {
             res.status(201).json({
                 id,
                 username,
                 email
             })
         })
-        .catch((err) =>{
+        .catch((err) => {
             next(err)
         })
     }
@@ -29,28 +29,28 @@ class UserController {
                 email: req.body.identity || ''
             }})
         .then((data) =>{
-            if(!data){
+            if (!data) {
                 return User.findOne({
                     where: {
                         username: req.body.identity || ''
                     }})
-            }else{
+            } else {
                 return data
             }
         })
         .then((user) =>{
-            if(!user){
+            if (!user) {
                 next({ 
                     status: 400,
                     message: 'Invalid email/username or password'
                 })
-            }else{
-                if(!checkPassword(req.body.password || '', user.password)){
+            } else {
+                if (!checkPassword(req.body.password || '', user.password)) {
                     next({
                         status: 400,
                         message: 'Invalid email/username or password'
                     })
-                }else{
+                } else {
                     const jwtToken = generateToken({
                         id: user.id,
                         email: user.email,
@@ -60,7 +60,7 @@ class UserController {
                 }
             }
         })
-        .catch((err) =>{
+        .catch((err) => {
             next(err)
         })
     }

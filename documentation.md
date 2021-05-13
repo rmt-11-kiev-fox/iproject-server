@@ -99,3 +99,57 @@ Response:
   "message": "Internal Server Error"
 }
 ```
+
+
+### GET /animals
+
+Additional Request:
+
+- header:
+  access_token
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+  "UserId": "Integer",
+  "animals": [
+      {
+        "id": "integer",
+        "name": "string",
+        "description": "string",
+        "image_URL": "string",
+        "habitat": "string",
+        "type": "string",
+        "isNocturnal": "boolean",
+        "isDiurnal": "boolean",
+        "totalFavorite": "integer",
+        "Users": [
+            {
+                "id": "integer",
+                "FavoriteAnimal": {
+                    "UserId": 1,
+                    "AnimalId": 1,
+                    "createdAt": "2021-05-13T01:40:31.000Z",
+                    "updatedAt": "2021-05-13T01:40:31.000Z"
+                }
+            }
+        ]
+      }
+  ]
+}
+```
+
+- status: 500
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
