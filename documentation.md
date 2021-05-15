@@ -248,6 +248,16 @@ Response:
 }
 ```
 
+- status: 401
+- body:
+  ​
+
+```json
+{
+  "message": "Please Login First"
+}
+```
+
 - status: 404
 - body:
   ​
@@ -300,6 +310,16 @@ Response:
 }
 ```
 
+- status: 401
+- body:
+  ​
+
+```json
+{
+  "message": "Please Login First"
+}
+```
+
 - status: 404
 - body:
   ​
@@ -307,6 +327,86 @@ Response:
 ```json
 {
   "message": "Animal with ID id not Found"
+}
+```
+
+- status: 500
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
+
+
+### GET /favorites
+
+Request:
+
+- header:
+  access_token
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+    "data": {
+        "id": "integer",
+        "username": "string",
+        "email": "string",
+        "Animals": [
+            {
+                "id": "integer",
+                "name": "string",
+                "description": "string",
+                "image_URL": "string",
+                "habitat": "string",
+                "type": "string",
+                "isNocturnal": "boolean",
+                "isDiurnal": "boolean",
+                "totalFavorite": "integer",
+                "FavoriteAnimal": {
+                    "UserId": "integer",
+                    "AnimalId": "integer",
+                    "createdAt": "date",
+                    "updatedAt": "date"
+                }
+            },
+            {
+                "id": "integer",
+                "name": "string",
+                "description": "string",
+                "image_URL": "string",
+                "habitat": "string",
+                "type": "string",
+                "isNocturnal": "boolean",
+                "isDiurnal": "boolean",
+                "totalFavorite": "integer",
+                "FavoriteAnimal": {
+                    "UserId": "integer",
+                    "AnimalId": "integer",
+                    "createdAt": "date",
+                    "updatedAt": "date"
+                }
+            }
+        ]
+    }
+}
+```
+
+- status: 401
+- body:
+  ​
+
+```json
+{
+  "message": "Please Login First"
 }
 ```
 

@@ -33,7 +33,7 @@ class AnimalController {
                 model: User,
                 attributes: { exclude: ['username', 'email', 'password', 'createdAt', 'updatedAt'] },
             },
-            attributes: { exclude: ['createdAt', 'updatedAt'] },
+            attributes: { exclude: ['createdAt', 'updatedAt'] }
         })
         .then((animal) => {
             if (!animal) {
@@ -89,6 +89,16 @@ class AnimalController {
             }
         })
         .then((resp) => {
+            return Animal.increment({
+                totalFavorite: 1
+            },
+            {
+                where: {
+                    id: +req.params.animalId
+                }
+            })
+        })
+        .then((result) => {
             res.status(201).json({
                 message: "Success"
             })
@@ -127,10 +137,42 @@ class AnimalController {
                     message: 'Remove Failed'
                 })
             } else {
-                res.status(200).json({
-                    message: 'Remove Success'
+                return Animal.decrement({
+                    totalFavorite: 1
+                },
+                {
+                    where: {
+                        id: +req.params.animalId
+                    }
                 })
             }
+        })
+        .then((result) => {
+            res.status(200).json({
+                message: 'Remove Success'
+            })
+        })
+        .catch((err) => {
+            next(err)
+        })
+    }
+
+    static getFavorites(req, res, next){
+
+        User.findOne({
+            where: {
+                id: +req.loggedUser.id
+            },
+            include: {
+                model: Animal,
+                attributes: { exclude: ['createdAt', 'updatedAt'] },
+            },
+            attributes: { exclude: ['password', 'createdAt', 'updatedAt'] }
+        })
+        .then((data) => {
+            res.status(200).json({
+                data
+            })
         })
         .catch((err) => {
             next(err)
