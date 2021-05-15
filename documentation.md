@@ -153,3 +153,169 @@ Response:
   "message": "Internal Server Error"
 }
 ```
+
+
+### GET /animals/:animalId
+
+Additional Request:
+
+- header:
+  access_token
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+  "UserId": "Integer",
+  "animals": {
+        "id": "integer",
+        "name": "string",
+        "description": "string",
+        "image_URL": "string",
+        "habitat": "string",
+        "type": "string",
+        "isNocturnal": "boolean",
+        "isDiurnal": "boolean",
+        "totalFavorite": "integer",
+        "Users": [
+            {
+                "id": "integer",
+                "FavoriteAnimal": {
+                    "UserId": 1,
+                    "AnimalId": 1,
+                    "createdAt": "2021-05-13T01:40:31.000Z",
+                    "updatedAt": "2021-05-13T01:40:31.000Z"
+                }
+            }
+        ]
+      }
+}
+```
+
+- status: 404
+- body:
+  ​
+
+```json
+{
+  "message": "Animal with ID id not Found"
+}
+```
+
+- status: 500
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
+
+
+### POST /favorites/:animalId
+
+Request:
+
+- header:
+  access_token
+- req.params:
+  animalId
+
+Response:
+
+- status: 201
+- body:
+  ​
+
+```json
+{
+    "message": "Success"
+}
+```
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+  "message": "This Animal is Already in Your Favorite List"
+}
+```
+
+- status: 404
+- body:
+  ​
+
+```json
+{
+  "message": "Animal with ID id not Found"
+}
+```
+
+- status: 500
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```
+
+
+### DELETE /favorites/:animalId
+
+Request:
+
+- header:
+  access_token
+- req.params:
+  animalId
+
+Response:
+
+- status: 200
+- body:
+  ​
+
+```json
+{
+    "message": "Remove Success"
+}
+```
+
+- status: 400
+- body:
+  ​
+
+```json
+{
+  "message": "Remove Failed"
+}
+```
+
+- status: 404
+- body:
+  ​
+
+```json
+{
+  "message": "Animal with ID id not Found"
+}
+```
+
+- status: 500
+- body:
+  ​
+
+```json
+{
+  "message": "Internal Server Error"
+}
+```

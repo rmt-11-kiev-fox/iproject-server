@@ -40,13 +40,13 @@ class UserController {
         })
         .then((user) =>{
             if (!user) {
-                next({ 
+                throw ({ 
                     status: 400,
                     message: 'Invalid email/username or password'
                 })
             } else {
                 if (!checkPassword(req.body.password || '', user.password)) {
-                    next({
+                    throw ({
                         status: 400,
                         message: 'Invalid email/username or password'
                     })
