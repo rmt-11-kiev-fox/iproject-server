@@ -1,5 +1,5 @@
 'use strict';
-const axios = require('axios');
+const fs = require('fs');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -12,19 +12,12 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    // call axios to get symptoms data
-    axios({
-      method: 'GET',
-      url: `https://healthservice.priaid.ch/symptoms?token=${process.env.API_MEDIC_AUTH_TOKEN}&format=json&language=en-gb`
+    let data = JSON.parse(fs.readFileSync('./data/symptoms.json', 'utf8'));
+    data.map((symptom) => {
+      symptom.createdAt = new Date();
+      symptom.updatedAt = new Date();
     })
-      .then((response) => {
-        
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-    // let data = '';
-    // await queryInterface.bulkInsert('Symptoms', data, {})
+    await queryInterface.bulkInsert('Symptoms', data, {})
   },
 
   down: async (queryInterface, Sequelize) => {
