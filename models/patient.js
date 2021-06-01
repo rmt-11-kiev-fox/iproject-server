@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Patient.belongsTo(models.User, { foreignKey: 'user_id' });
-      Patient.hasMany(models.Symptom, { foreignKey: 'symptoms' });
+      Patient.belongsTo(models.User, { foreignKey: 'user_id' })
     }
   };
   Patient.init({
@@ -62,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     user_id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: {
           tableName: 'Users',

@@ -11,12 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      // DEFINE RELATION FOR ARRAY OF FOREIGN KEYS
-      Symptom.belongsTo(models.Patient, { foreignKey: 'symptoms' });
     }
   };
   Symptom.init({
-    id: DataTypes.INTEGER,
     name: DataTypes.STRING
   }, {
     sequelize,

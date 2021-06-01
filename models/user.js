@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      User.hasMany(models.Patient, { foreignKey: 'user_id' });
+      User.hasMany(models.Patient, { foreignKey: 'user_id' })
     }
   };
   User.init({
@@ -25,7 +25,6 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    username: DataTypes.STRING,
     email: {
       type: DataTypes.STRING,
       unique: true,
@@ -38,11 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     password: DataTypes.STRING
   }, {
     hooks: {
-      beforeCreate: {
         beforeCreate(instance, options) {
           instance.password = hash(instance.password)
         }
-      }
     },
     sequelize,
     modelName: 'User',

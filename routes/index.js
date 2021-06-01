@@ -1,8 +1,14 @@
 const express = require('express');
 const app = express();
 
-// import routes
+// IMPORT ROUTES
+const userRoutes = require('./userRoutes')
+const patientRoutes = require('./patientRoutes')
+const symptomRoutes = require('./symptomRoutes')
 
-// use routes
+// USE ROUTES WITH/WITHOUT PREFIXES
+app.use(userRoutes)
+app.use('/patients', patientRoutes)
+app.use('/symptoms', symptomRoutes)
 
 module.exports = app
