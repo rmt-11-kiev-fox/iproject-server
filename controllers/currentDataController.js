@@ -16,15 +16,23 @@ class CurrentData {
             const dataGeo = await axios({
                 url: `${geoUrl}api_key=${apiKeyGeoUrl}`,
             });
+            // console.log(dataGeo.data);
             dataLocation = {
                 ip_address: dataGeo.data.ip_address,
                 country: dataGeo.data.country,
                 city: dataGeo.data.city,
+                flag: dataGeo.data.flag.png,
             };
             const weatherApi = await axios({
                 url: `${weatherUrl}${dataLocation.city}&appid=${apiKeyWeatherUrl}`,
             });
-            dataWeather = await weatherApi.data.weather[0];
+            dataWeather = {
+                id: weatherApi.data.weather[0].id,
+                main: weatherApi.data.weather[0].main,
+                descrtion: weatherApi.data.weather[0].descrtion,
+                icon: `https://openweathermap.org/img/wn/${weatherApi.data.weather[0].icon}@2x.png`,
+            };
+            console.log(dataWeather);
             genre = genreChecking(dataWeather.main);
             // genre = genreChecking("Thunderstorm");
             const dataGenre = await axios({
@@ -36,14 +44,12 @@ class CurrentData {
                 dataFormGenre += dataGenre.data[index];
             }
             dataFormGenre = JSON.parse(dataFormGenre);
-            console.log(dataFormGenre.message.body.track_list[0]);
             let temp = dataFormGenre.message.body.track_list.map((el) => {
                 return {
                     id: el.track.track_id,
                     name: el.track.track_name,
                 };
             });
-            console.log(temp);
             let mapping = [];
             let nameMapping = [];
             for (let index = 0; index < temp.length; index++) {

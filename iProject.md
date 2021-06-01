@@ -9,7 +9,7 @@
 Method: POST
 
 > ```
-> {{host}}/users/register
+> /users/register
 > ```
 
 ### Body (**raw**)
@@ -39,7 +39,7 @@ Method: POST
 Method: POST
 
 > ```
-> {{host}}/users/login
+> /users/login
 > ```
 
 ### Body (**raw**)
@@ -69,7 +69,7 @@ Method: POST
 Method: PUT
 
 > ```
-> {{host}}/users/changePassword
+> /users/changePassword
 > ```
 
 ### Headers
@@ -105,7 +105,7 @@ Method: PUT
 Method: GET
 
 > ```
-> {{host}}/playlists
+> /playlists
 > ```
 
 ### Headers
@@ -139,7 +139,7 @@ Method: GET
 Method: POST
 
 > ```
-> {{host}}/playlists
+> /playlists
 > ```
 
 ### Headers
@@ -181,7 +181,7 @@ Method: POST
 Method: DELETE
 
 > ```
-> {{host}}/playlists/1
+> /playlists/1
 > ```
 
 ### Headers
@@ -209,7 +209,7 @@ Method: DELETE
 Method: GET
 
 > ```
-> {{host}}/currentDatas
+> /currentDatas
 > ```
 
 ### Headers
@@ -225,13 +225,13 @@ Method: GET
     "location": {
         "ip_address": "110.137.38.151",
         "country": "Indonesia",
-        "city": "Bandar Lampung"
+        "city": "Bandar Lampung",
+        "flag": "https://static.abstractapi.com/country-flags/ID_flag.png"
     },
     "weather": {
-        "id": 801,
+        "id": 802,
         "main": "Clouds",
-        "description": "few clouds",
-        "icon": "02n"
+        "icon": "https://openweathermap.org/img/wn/03n@2x.png"
     },
     "querySearch": [
         {
