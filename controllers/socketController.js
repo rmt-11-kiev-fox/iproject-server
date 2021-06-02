@@ -1,6 +1,6 @@
 'use strict'
 const axios = require('axios')
-let isActiveServer = false
+// let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
     category: '',
@@ -93,6 +93,7 @@ class Controller {
                                         currentQuestion
                                     )
                                     counter = 10
+                                    io.sockets.emit('receiveTimeLeft', counter)
                                     interval = setInterval(timer, 1000)
                                 })
                                 .catch(err => {
@@ -102,6 +103,17 @@ class Controller {
                     }
                 }
                 let interval = setInterval(timer, 1000)
+            })
+            socket.on('submitAnswer', answer => {
+                if (answer === currentCorrectAnswer) {
+                    // console.log('CORRECT ANSWER')
+                    // console.log('CORRECT ANSWER:', currentCorrectAnswer)
+                    socket.emit('correctAnswer', currentCorrectAnswer)
+                } else {
+                    // console.log('WRONG ANSWER')
+                    // console.log('CORRECT ANSWER:', currentCorrectAnswer)
+                    socket.emit('wrongAnswer', currentCorrectAnswer)
+                }
             })
         })
     }
