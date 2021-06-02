@@ -18,17 +18,19 @@ class Controller {
         }
     }
     static async updateGameScore(req, res, next){
+        console.log("HERE UPDATE");
+        console.log(req.body);
+        console.log("HEYHEY");
         let gameId = req.body.gameId
         let score = 0
         try{
-
             let questionData = await Question.findAll({where:{GameId:gameId}})
             questionData.forEach((el) =>{
                 if(el.correctAnswer === el.userAnswer){
                     score++
                 }
             })
-            score = (score*10)/questionData.length
+            score = Math.floor((score*10)/questionData.length)
             let gameDetail = await Game.findOne({
                 where:{
                     id:gameId
@@ -46,6 +48,22 @@ class Controller {
                 returning:true
             })
             res.status(200).json(updatedData)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getGameStats(req, res, next){
+        console.log(req.body);
+        let GameId = req.body.GameId
+        try {
+            let questionData = await Question.findAll({where:{GameId}})
+            let gameData = await Game.findByPk(GameId)
+            let data = {
+                gameData,
+                questionData
+            }
+            res.status(200).json(data)
         }
         catch(err){
             console.log(err);

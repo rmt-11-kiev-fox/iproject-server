@@ -64,6 +64,21 @@ class Controller{
             next({name: "ServerError", message:err.message})
         })
     }
+    static async getProfile(req, res, next){
+        let id = req.body.UserId
+        try{
+            let userData = await User.findByPk(id)
+            let data = {
+                name: userData.name,
+                email: userData.email,
+                achievement: userData.achievement
+            }
+            res.status(200).json(data)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
 
 }
 

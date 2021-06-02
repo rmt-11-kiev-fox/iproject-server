@@ -42,6 +42,7 @@ class Controller {
         }
     }
     static async getQuestion (req, res, next) {
+        console.log(req.body);
         let alphabet = ['a', 'b', 'c', 'd']
         let GameId = req.body.GameId
         try{
@@ -52,10 +53,11 @@ class Controller {
                 correctData: data[randomNumber],
                 answersData: data
             }
-            let questionData = Question.create({
+            let questionData = await Question.create({
                 correctAnswer : alphabet[randomNumber],
                 GameId : GameId
             })
+            question.id = questionData.id
             question.answersData = data
             res.status(200).json(question)
         }
@@ -64,6 +66,7 @@ class Controller {
         }
     }
     static async answerQuestion (req, res, next){
+        console.log(req.body);
         let userAnswer = req.body.answer
         let id = req.body.questionId
         try{
