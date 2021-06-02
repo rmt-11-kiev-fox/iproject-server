@@ -23,6 +23,7 @@ let lobbyData = {
     get guestsNumber() {
         return this.connectedUsers - this.onlineUsers.length;
     },
+    rooms: [],
 };
 
 // let onlineUsers = [];
@@ -62,8 +63,8 @@ io.on("connection", (socket) => {
                 (el) => el.email === socket.email
             );
             lobbyData.onlineUsers.splice(userIndex, 1);
-            io.emit("updateData", lobbyData);
         }
+        io.emit("updateData", lobbyData);
         // io.emit("guestsNumber", getGuests());
     });
 
@@ -74,6 +75,34 @@ io.on("connection", (socket) => {
     socket.on("sendMessageLobby", (val) => {
         // console.log(val);
         socket.broadcast.emit("newLobbyMessage", val);
+    });
+
+    socket.on("userLogout", (val) => {
+        console.log(val, socket.email);
+        let userIndex = lobbyData.onlineUsers.findIndex(
+            (el) => el.email === val.email
+        );
+        lobbyData.onlineUsers.splice(userIndex, 1);
+        socket.email = "";
+        io.emit("updateData", lobbyData);
+    });
+
+    socket.on("createRoom", (val) => {
+        console.log(val);
+        const roomId = lobbyData.rooms.length
+            ? lobbyData.rooms[lobbyData.rooms.length - 1].roomId + 1
+            : 1;
+        const roomObject = {
+            roomName: val.roomName,
+            roomCreator: val.user,
+            roomId,
+            users: [],
+            songQueue: [],
+            currentSongDuration: 0,
+            currentSongAt: 0,
+        };
+        lobbyData.rooms.push(roomObject);
+        io.emit("updateData", lobbyData);
     });
 });
 
