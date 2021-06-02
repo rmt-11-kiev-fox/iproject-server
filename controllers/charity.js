@@ -32,7 +32,7 @@ module.exports = class Controller {
 		try {
 			const organizations = await axios({
 				method: 'GET',
-				url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&category=${id}&rows=40`
+				url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&category=${id}&rows=20`
 			})
 			res.status(200).json(organizations.data)
 		} catch (err) {
@@ -40,12 +40,29 @@ module.exports = class Controller {
 		}
 	}
 
+	// static async organizationById(req, res, next) {
+	// 	const id = req.params.id
+	// 	console.log(id);
+	// 	try {
+	// 		const organizations = await axios({
+	// 			method: 'GET',
+	// 			url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&ein=${id}`
+	// 		})
+	// 		res.status(200).json(organizations.data.category)
+
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 		next(err)
+	// 	}
+
+	// }
+
 	static async searchOrganizations(req, res, next) {
 		const keyword = encodeURIComponent(req.query.keyword)
 
 		try {
 			const organizations = await axios({
-				url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&searchTerm=${keyword}&rows=10`,
+				url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&searchTerm=${keyword}&rows=20`,
 				method: 'GET'
 			})
 			const organizationData = organizations.data.data
