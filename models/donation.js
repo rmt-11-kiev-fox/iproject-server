@@ -15,9 +15,9 @@ module.exports = (sequelize, DataTypes) => {
   };
   Donation.init({
     UserId: DataTypes.INTEGER,
-    organzationName: DataTypes.STRING,
+    organizationName: DataTypes.STRING,
     amount: DataTypes.DOUBLE,
-    type: DataTypes.STRING
+    paymentType: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Donation',

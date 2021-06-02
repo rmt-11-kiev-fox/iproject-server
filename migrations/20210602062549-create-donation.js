@@ -17,13 +17,13 @@ module.exports = {
         onDelete: 'cascade',
         onUpdate: 'cascade'
       },
-      organzationName: {
+      organizationName: {
         type: Sequelize.STRING
       },
       amount: {
         type: Sequelize.DOUBLE
       },
-      type: {
+      paymentType: {
         type: Sequelize.STRING
       },
       createdAt: {
