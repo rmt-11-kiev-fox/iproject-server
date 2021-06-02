@@ -26,7 +26,8 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     notEmpty: true
                 }
-            }
+            },
+            point: DataTypes.INTEGER
         },
         {
             sequelize,

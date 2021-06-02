@@ -7,7 +7,7 @@ class Controller {
     static async register(req, res, next) {
         try {
             const { username, password } = req.body
-            const newUser = await User.create({ username, password })
+            const newUser = await User.create({ username, password, point: 0 })
             res.status(201).json({
                 id: newUser.id,
                 username
@@ -27,7 +27,7 @@ class Controller {
                 foundUser.password
             )
             if (!isCorrectPassword) throw { name: 'invalidLogin' }
-            const { id } = foundUser
+            const { id, point } = foundUser
             const access_token = signToken({
                 id,
                 username
@@ -35,7 +35,22 @@ class Controller {
             res.status(200).json({
                 id,
                 username,
+                point,
                 access_token
+            })
+        } catch (err) {
+            next(err)
+        }
+    }
+
+    static async updatePoint(req, res, next) {
+        try {
+            const { id } = req.params
+            const { point } = req.body
+            const result = await User.update({ point }, { where: { id } })
+            if (!result[0]) throw { name: 'failedPointUpdate' }
+            res.status(200).json({
+                message: "User's point updated successfully!"
             })
         } catch (err) {
             next(err)

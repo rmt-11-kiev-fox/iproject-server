@@ -79,12 +79,24 @@ class Controller {
                 }
                 let interval = setInterval(timer, 1000)
             })
-            socket.on('submitAnswer', answer => {
+            socket.on('submitAnswer', payload => {
+                const { currentUser, timeLeft, answer } = payload
+                const { id, point } = currentUser
+                let newPoint
                 if (answer === currentCorrectAnswer) {
-                    socket.emit('correctAnswer')
+                    newPoint = point + timeLeft * 10
+                    socket.emit('correctAnswer', {
+                        newPoint,
+                        increment: timeLeft * 10
+                    })
                 } else {
-                    socket.emit('wrongAnswer')
+                    newPoint = point - 10
+                    socket.emit('wrongAnswer', {
+                        newPoint,
+                        decrement: -10
+                    })
                 }
+                Controller.updatePoint(id, newPoint)
             })
         })
     }
@@ -103,6 +115,21 @@ class Controller {
                 question,
                 answers
             }
+        })
+    }
+
+    static updatePoint(UserId, point) {
+        return axios({
+            url: `http://localhost:3000/users/${UserId}`,
+            method: 'PATCH',
+            headers: {
+                socket_key: process.env.SOCKET_AUTH_KEY
+            },
+            data: {
+                point
+            }
+        }).catch(err => {
+            console.log(err)
         })
     }
 }
