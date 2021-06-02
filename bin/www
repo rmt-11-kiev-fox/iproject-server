@@ -1,0 +1,5 @@
+const { server, port } = require('../server')
+
+server.listen(port, function() {
+  console.log('Express running on port', port);
+});
