@@ -11,10 +11,22 @@ module.exports = {
       category: {
         type: Sequelize.STRING,
       },
+      type: {
+        type: Sequelize.ENUM("Movies", "Tv"),
+      },
       UserId: {
         type: Sequelize.INTEGER,
       },
       MovieId: {
+        type: Sequelize.INTEGER,
+      },
+      posterPath: {
+        type: Sequelize.STRING,
+      },
+      title: {
+        type: Sequelize.STRING,
+      },
+      releaseDate: {
         type: Sequelize.STRING,
       },
       createdAt: {

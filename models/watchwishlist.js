@@ -14,8 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   WatchWishlist.init(
     {
       category: DataTypes.STRING,
+      type: DataTypes.STRING,
       UserId: DataTypes.INTEGER,
-      MovieId: DataTypes.STRING,
+      MovieId: DataTypes.INTEGER,
+      posterPath: DataTypes.STRING,
+      title: DataTypes.STRING,
+      releaseDate: DataTypes.STRING,
     },
     {
       sequelize,

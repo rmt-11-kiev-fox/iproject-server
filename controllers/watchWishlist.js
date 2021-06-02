@@ -1,4 +1,4 @@
-const { WatchWishlist, Movie } = require("../models");
+const { WatchWishlist } = require("../models");
 
 class Controller {
   static ShowAllWishlist(req, res) {
@@ -28,11 +28,14 @@ class Controller {
       });
   }
   static addWishlist(req, res) {
-    console.log("IN add wishlist");
     let newWishlist = {
       category: req.body.category,
+      type: req.body.type,
       UserId: req.user.id,
       MovieId: req.body.MovieId,
+      posterPath: "https://image.tmdb.org/t/p/w500" + req.body.posterPath,
+      title: req.body.title,
+      releaseDate: req.body.releaseDate,
     };
     WatchWishlist.findOne({
       where: { id: newWishlist.MovieId, UserId: newWishlist.UserId },
