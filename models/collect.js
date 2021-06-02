@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Collect.belongsTo(models.User)
     }
   };
   Collect.init({
@@ -54,7 +54,8 @@ module.exports = (sequelize, DataTypes) => {
           msg: 'Notes cannot be empty!'
         }
       }
-    }
+    },
+    UserId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Collect',
