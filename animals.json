@@ -1,0 +1,189 @@
+[
+    {
+        "name": "Lion",
+        "description": "The lion is the second largest member of the cat family after the tiger. Lions live in parts of Africa and India. Their loud roar is among the most terrifying sounds of the grasslands. The scientific name of the lion is Panthera leo.",
+        "image_URL": "https://i.natgeofe.com/n/80b97fe3-c0fb-40a6-a6a6-88b5c3bb9d30/01-lion-populations-nationalgeographic_1777804.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "lion.wav"
+    },
+    {
+        "name": "Horse",
+        "description": "The horse is a mammal that people have valued for thousands of years. In the past people commonly used horses to get from place to place and to pull heavy loads. The scientific name of the horse is Equus caballus.",
+        "image_URL": "https://theplaidhorse.s3.amazonaws.com/media/uploads/2020/08/AdobeStock_326500445-1-scaled.jpeg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "horse.wav"
+    },
+    {
+        "name": "Fox",
+        "description": "Foxes are mammals that look like small, bushy-tailed dogs. They live all over the world. Different kinds favor different habitats.",
+        "image_URL": "https://farm66.staticflickr.com/65535/39640426683_76fd376222_b.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "fox.wav"
+    },
+    {
+        "name": "Koala",
+        "description": "The koala bear is an Australian tree-dwelling marsupial mammal that has large hairy ears, thick gray fur, sharp claws for climbing, and no tail and feeds on eucalyptus leaves. They sleep for up to 19 hours a day.",
+        "image_URL": "https://akcdn.detik.net.id/visual/2014/12/10/4a733b15-8467-4f7c-9c1c-349c7bfe8f57_169.jpg?w=650",
+        "habitat": "Arboreal",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": false,
+        "totalFavorite": 0,
+        "sound": ""
+    },
+    {
+        "name": "Badgers",
+        "description": "Badgers are mammals known for their powerful digging. They are related to weasels, skunks, otters, and mink. Badgers live in many habitats, including grasslands and forests.",
+        "image_URL": "https://www.gosport.gov.uk/image/2569/A-photo-of-a-badger/original.jpg?m=637177279499000000",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": false,
+        "totalFavorite": 0,
+        "sound": "badgers.wav"
+    },
+    {
+        "name": "Giraffe",
+        "description": "The giraffe is the tallest living animal. It can reach a height of more than 18 feet (5.5 meters). Giraffes have a short body, but their legs and neck are very long. Giraffes live on the plains of eastern Africa.",
+        "image_URL": "https://cdn.shopify.com/s/files/1/1951/2637/articles/093020_Giraffe-Campaign_Featured-image_1024x1024.jpg?v=1601822066",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": false,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": ""
+    },
+    {
+        "name": "Bison",
+        "description": "Bison are the largest land mammals in North America and Europe. The animal commonly called the American buffalo is actually the American bison. The European bison is also called the wisent.",
+        "image_URL": "https://cdn0-production-images-kly.akamaized.net/pTiJG__iYRHsgUL_0EG8TR7BmzU=/673x379/smart/filters:quality(75):strip_icc():format(jpeg)/kly-media-production/medias/3134722/original/033033900_1590122001-000_AW3YC.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": false,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": ""
+    },
+    {
+        "name": "Bear",
+        "description": "Bears are large, powerful mammals related to dogs and raccoons. There are several species, or types, of bear. They are the polar bear, the brown bear, the black bear, the Asiatic black bear, the sun bear, the spectacled bear, and the sloth bear.",
+        "image_URL": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/2010-kodiak-bear-1.jpg/1200px-2010-kodiak-bear-1.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "bear.wav"
+    },
+    {
+        "name": "Wolf",
+        "description": "Wolves are members of the dog family. They are known for their intelligence and courage. Wolves are also noted for traveling very long distances. North American Indians named their most powerful warriors after wolves",
+        "image_URL": "https://i.kym-cdn.com/photos/images/newsfeed/001/870/322/65b.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "wolf.wav"
+    },
+    {
+        "name": "Tiger",
+        "description": "The tiger is the largest of the cats. Like lions, tigers are very strong and fierce hunters. Tigers are found in the wild only in parts of Russia, China, and South and Southeast Asia. They live in forests, grasslands, and swamps.",
+        "image_URL": "https://cdn.vox-cdn.com/thumbor/6oEPJ9s5H9rzubYWS-LKBWhNE9k=/0x0:3000x2225/1200x800/filters:focal(1082x339:1562x819)/cdn.vox-cdn.com/uploads/chorus_image/image/66609943/GettyImages_137497593.0.jpg",
+        "habitat": "Terrestrial",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "tiger.wav"
+    },
+    {
+        "name": "Owl",
+        "description": "Owls are birds of prey, meaning that they hunt and eat animals. Unlike most other birds of prey, owls are nocturnal, or active at night. Their nighttime activity, quiet flight, and strange calls have made them the subject of many stories.",
+        "image_URL": "https://cdn.theatlantic.com/media/img/photo/2020/02/photos-superb-owl-sunday-iv/s01_1103328920/main_1500.jpg",
+        "habitat": "Aerial",
+        "type": "Poultry",
+        "isNocturnal": true,
+        "isDiurnal": false,
+        "totalFavorite": 0,
+        "sound": "owl.wav"
+    },
+    {
+        "name": "Eagle",
+        "description": "Eagles are large birds of prey, meaning that they hunt and eat animals for food. They are related to hawks, falcons, and vultures. Eagles have long held a special place in the human imagination because of their strength and soaring flight.",
+        "image_URL": "https://cdn.mos.cms.futurecdn.net/zZMj3UWfdwCQKDJGbaFk3h-1200-80.jpg",
+        "habitat": "Aerial",
+        "type": "Poultry",
+        "isNocturnal": false,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "eagle.wav"
+    },
+    {
+        "name": "Crocodile",
+        "description": "Crocodiles are lizardlike, flesh-eating animals. They are the largest living members of the group of animals called reptiles. They are related to alligators.",
+        "image_URL": "https://cdn.britannica.com/84/198884-050-A37B8971/crocodile-Nile-swath-one-sub-Saharan-Africa-Madagascar.jpg",
+        "habitat": "Amphibians",
+        "type": "Reptile",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "crocodile.wav"
+    },
+    {
+        "name": "Frog",
+        "description": "Frogs are small animals that can jump very well. Frogs are similar to toads. However, a frog has smooth skin and long legs. A toad has rough skin and shorter legs. Frogs are found throughout the world except in very cold places.",
+        "image_URL": "https://lh3.googleusercontent.com/proxy/LDk0f8PwpGMY7yzIzxNdDx-CbJ_uiKXgj-Pr44VqoV8YX--dqEEnbce1hYcjlAxW27P4Tz7jw4ChIlL5I2hxFYB1h9RGXMY3_AR8ReH3ACSc6Dn3Zc3v9wIASqsWeEIYyi-s",
+        "habitat": "Amphibians",
+        "type": "Anura",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "frog.wav"
+    },
+    {
+        "name": "Shark",
+        "description": "Sharks are fast-swimming fishes that have a skeleton made of cartilage instead of bone. (Cartilage is an elastic tissue that is created before bone begins to form.) They are related to rays. Sharks are among the oldest animals on Earth.",
+        "image_URL": "https://static01.nyt.com/images/2020/08/12/multimedia/00xp-shark/00xp-shark-videoSixteenByNineJumbo1600.jpg",
+        "habitat": "Aquatic",
+        "type": "Fish",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "shark.wav"
+    },
+    {
+        "name": "Whale",
+        "description": "Whales are large animals that live in water. Whales may look like fishes, but they are mammals. They breathe air and produce milk for their young. Whales make up an order, or large group of animals, called Cetacea.",
+        "image_URL": "https://www.scubadiving.com/sites/scubadiving.com/files/styles/opengraph_1_91x1/public/images/2021/03/humpback-whale-shutterstock-craig-lambert-photography.jpg?itok=UkKURyI3",
+        "habitat": "Aquatic",
+        "type": "Mammals",
+        "isNocturnal": true,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "whale.wav"
+    },
+    {
+        "name": "Dolphin",
+        "description": "Dolphins look like big fishes, but they are actually mammals. They belong to a large group of animals called whales. Dolphins are closely related to porpoises. However, dolphins are usually larger and have longer, beaklike snouts.",
+        "image_URL": "https://quizizz.com/_media/quizzes/d5a2c0d2-a8a8-4827-b96d-114f391af7fe_900_900",
+        "habitat": "Aquatic",
+        "type": "Mammals",
+        "isNocturnal": false,
+        "isDiurnal": true,
+        "totalFavorite": 0,
+        "sound": "dolphin.wav"
+    }
+]

@@ -76,6 +76,7 @@ Response:
 
 ```json
 {
+    "username": "string",  
     "access_token": "jwt string"
 }
 ```

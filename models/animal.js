@@ -60,7 +60,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     isNocturnal: DataTypes.BOOLEAN,
     isDiurnal: DataTypes.BOOLEAN,
-    totalFavorite: DataTypes.INTEGER
+    totalFavorite: DataTypes.INTEGER,
+    sound: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Animal',

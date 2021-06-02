@@ -56,7 +56,10 @@ class UserController {
                         email: user.email,
                         username: user.username
                     })
-                    res.status(200).json({ access_token: jwtToken })
+                    res.status(200).json({
+                        username: user.username,
+                        access_token: jwtToken
+                    })
                 }
             }
         })

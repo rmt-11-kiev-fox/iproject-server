@@ -67,42 +67,4 @@ function Authorization(req, res, next) {
     })
 }
 
-
-function checkToken(req, res, next){
-    const access_token = req.headers.access_token
-
-    if (!access_token) {
-        req.loggedUser = {
-            id: null
-        }
-        next()
-    } else {
-        const decode = verify(access_token)
-        User.findOne({
-            where :{
-                username: decode.username,
-                email: decode.email
-            }
-        })
-        .then((user) =>{
-            if (!user) {
-                next({ 
-                    status: 401,
-                    message: 'Invalid Token'
-                })
-            } else {
-                req.loggedUser = {
-                    id: decode.id,
-                    username: decode.username,
-                    email: decode.email
-                }
-                next()
-            }
-        })
-        .catch((err) => {
-            next(err)
-        })
-    }
-}
-
-module.exports = { Authentication, Authorization, checkToken }
+module.exports = { Authentication, Authorization }
