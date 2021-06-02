@@ -5,8 +5,8 @@ const { compareHash } = require('../helpers/bcrypt')
 module.exports = class Controller {
 
 	static async register(req, res, next) {
-		const { fName, lName, username, email, phoneNumber, address, password } = req.body
-		const input = { fName, lName, username, email, phoneNumber, address, password }
+		const { firstName, lastName, username, email, phoneNumber, address, password } = req.body
+		const input = { firstName, lastName, username, email, phoneNumber, address, password }
 		try {
 			const newUser = await User.create(input, {
 				attributes: {
