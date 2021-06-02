@@ -4,6 +4,7 @@ const Admin = require('../models').Admin
 const Booking = require('../models').Booking
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const sendMail = require('../helpers/send-mail')
 
 class BcryptPassword{
     static hashPassword(pass){
@@ -76,7 +77,11 @@ router.post('/signIn', (req, res, next)=>{
 })
 
 router.get('/bookings', authentication, (req, res, next)=>{
-    Booking.findAll({})
+    Booking.findAll({
+        order: [
+            ['id', 'ASC']
+        ]
+    })
     .then(result=>{
        res.status(200).json({bookings: result})
     })
@@ -93,6 +98,7 @@ router.post('/bookings', (req, res, next)=>{
         notes: req.body.notes
     })
     .then(result=>{
+        sendMail(req.body.email)
         res.status(201).json({bookings:result})
     })
     .catch(err=>{
