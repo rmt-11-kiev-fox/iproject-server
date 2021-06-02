@@ -88,7 +88,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("createRoom", (val) => {
-        console.log(val);
+        // console.log(val);
         const roomId = lobbyData.rooms.length
             ? lobbyData.rooms[lobbyData.rooms.length - 1].roomId + 1
             : 1;
@@ -102,6 +102,24 @@ io.on("connection", (socket) => {
             currentSongAt: 0,
         };
         lobbyData.rooms.push(roomObject);
+        io.emit("updateData", lobbyData);
+    });
+
+    socket.on("joinRoom", (val) => {
+        // joinRoom and roomUpdates dijadiin satu.
+        // console.log(val, "ini val");
+        let roomIndex = lobbyData.rooms.findIndex(
+            (el) => el.roomId === val.roomId
+        );
+        if (roomIndex !== -1) {
+            console.log("masuk room index");
+            lobbyData.rooms[roomIndex] = val;
+        }
+        // socket.join(val.roomId, () => {
+        //     io.sockets
+        //         .in(val.roomId)
+        //         .emit("roomData", lobbyData.rooms[roomIndex]);
+        // });
         io.emit("updateData", lobbyData);
     });
 });
