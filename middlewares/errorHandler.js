@@ -17,6 +17,10 @@ function errorHandler(err, req, res, next) {
             status = 400
             errors.push({ message: 'Invalid email or password!' })
             break
+        case 'failedPointUpdate':
+            status = 400
+            errors.push({ message: 'Point update failed!' })
+            break
         case 'failedAuthentication':
             status = 401
             errors.push({ message: 'Authentication failed!' })
