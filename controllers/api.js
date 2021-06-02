@@ -117,14 +117,29 @@ class Controller {
       });
   }
   static showMovieNews(req, res, next) {
-    let apiUrl = `https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI?q=movie&pageNumber=1&pageSize=50&autoCorrect=true&fromPublishedDate=null&toPublishedDate=null`;
-    axios
-      .get(apiUrl)
-      .then((data) => {
-        res.status(200).json(data);
+    axios({
+      method: "GET",
+      url: "https://contextualwebsearch-websearch-v1.p.rapidapi.com/api/search/NewsSearchAPI",
+      params: {
+        q: "Movies",
+        pageNumber: "1",
+        pageSize: "10",
+        autoCorrect: "true",
+        fromPublishedDate: "null",
+        toPublishedDate: "null",
+      },
+      headers: {
+        "x-rapidapi-key": "a33cc8bdcfmshdb86d36d8403c15p1daef4jsn3e2ef43c3703",
+        "x-rapidapi-host": "contextualwebsearch-websearch-v1.p.rapidapi.com",
+      },
+    })
+      .then(({ data }) => {
+        const stringData = JSON.stringify(data);
+        const parseData = JSON.parse(stringData);
+        res.status(200).json({ data: parseData });
       })
       .catch((err) => {
-        console.log(err, "show similar movies error");
+        console.log(err, "show movie news error");
       });
   }
   static showTvNews(req, res, next) {

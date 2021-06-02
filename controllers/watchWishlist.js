@@ -35,7 +35,7 @@ class Controller {
       type: req.body.newWishlist.type,
       UserId: req.user.id,
       MovieId: req.body.newWishlist.MovieId,
-      posterPath: "https://image.tmdb.org/t/p/w500" + req.body.posterPath,
+      posterPath: `https://image.tmdb.org/t/p/w500${req.body.newWishlist.posterPath}`,
       title: req.body.newWishlist.title,
       releaseDate: req.body.newWishlist.releaseDate,
     };
