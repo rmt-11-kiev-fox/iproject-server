@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
+const { map, covid, user } = require("../controllers");
 
-const mapRoutes = require("./map_routes");
-const covidRoutes = require("./covid_routes");
-
-router.use("/map", mapRoutes);
-router.use("/covid", covidRoutes);
+router.post("/map/suggestions", map.suggestions);
+router.get("/covid", covid.fetchAll);
+router.post("/login", user.login);
+router.post("/register", user.register);
 
 module.exports = router;
