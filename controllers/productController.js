@@ -1,6 +1,7 @@
-const { Product } = require("../models");
+const { Product, User } = require("../models");
 const axios = require("axios");
 
+// sudo kill -9 $(sudo lsof -t -i:3000)
 class productController {
   static async getAll(req, res, next) {
     // console.log(req.query, "<<<query");
@@ -75,6 +76,48 @@ class productController {
       res.status(201).json(myProduct);
     } catch (err) {
       console.log(err, "<<<err");
+      next(err);
+    }
+  }
+
+  static async getAllRec(req, res, next) {
+    // console.log(req.user.id);
+    let id = req.user.id;
+    try {
+      let recProduct = await Product.findAll({ where: { UserId: id } });
+
+      if (recProduct) {
+        res.status(200).json(recProduct);
+      } else {
+        throw {
+          name: "myError",
+          status: 404,
+          message: "you haven't add anything to your list",
+        };
+      }
+    } catch (err) {
+      console.log(err, "<<err");
+      next(err);
+    }
+  }
+
+  static async delete(req, res, next) {
+    console.log(req.user, "<<<user id");
+    console.log(req.params, "<<<params");
+    let id = +req.params.id;
+    try {
+      let delData = await Product.destroy({ where: { id } });
+      if (delData) {
+        res.status(200).json({ message: "data successfully deleted" });
+      } else {
+        throw {
+          name: "myError",
+          status: 404,
+          message: "data not found",
+        };
+      }
+    } catch (err) {
+      console.log(err, "<<err");
       next(err);
     }
   }
