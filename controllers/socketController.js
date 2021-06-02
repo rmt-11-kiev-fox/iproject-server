@@ -1,6 +1,6 @@
 'use strict'
 const axios = require('axios')
-// let isActiveServer = false
+let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
     category: '',
@@ -24,29 +24,11 @@ class Controller {
             })
             socket.on('submitChat', () => {
                 socket.broadcast.emit('receiveChat')
-                // console.log(connectedClients, '<<<<<')
             })
             socket.on('getNewQuestion', () => {
-                // isActiveServer = true
-                // axios({
-                //     url: 'http://localhost:3000/questions',
-                //     method: 'GET'
-                // })
-                //     .then(({ data }) => {
-                //         const { category, question, correct_answer } = data
-                //         currentCorrectAnswer = correct_answer
-                //         let answers = [
-                //             ...data.incorrect_answers,
-                //             data.correct_answer
-                //         ]
-                //         answers = answers.sort((a, b) => a - b)
-                //         currentQuestion = {
-                //             category,
-                //             question,
-                //             answers
-                //         }
                 Controller.getNewQuestion()
-                    .then(currentQuestion => {
+                    .then(fetchedQuestion => {
+                        currentQuestion = fetchedQuestion
                         io.sockets.emit('receiveQuestion', currentQuestion)
                     })
                     .catch(err => {
@@ -54,13 +36,17 @@ class Controller {
                     })
             })
             socket.on('getServerStatus', () => {
+                //
                 socket.emit('receiveServerStatus', isActiveServer)
             })
             socket.on('getCurrentQuestion', () => {
+                // console.log('MASUK SINI', '<<<<<')
                 socket.emit('receiveQuestion', currentQuestion)
             })
             socket.on('startTrivia', () => {
                 // set is active server
+                isActiveServer = true
+                io.sockets.emit('startTrivia')
                 let counter = 10
                 const timer = () => {
                     console.log(`counter: ${counter}`)
@@ -86,6 +72,8 @@ class Controller {
                                 .catch(err => {
                                     console.log(err)
                                 })
+                        } else {
+                            isActiveServer = false
                         }
                     }
                 }
@@ -93,12 +81,8 @@ class Controller {
             })
             socket.on('submitAnswer', answer => {
                 if (answer === currentCorrectAnswer) {
-                    // console.log('CORRECT ANSWER')
-                    // console.log('CORRECT ANSWER:', currentCorrectAnswer)
                     socket.emit('correctAnswer')
                 } else {
-                    // console.log('WRONG ANSWER')
-                    // console.log('CORRECT ANSWER:', currentCorrectAnswer)
                     socket.emit('wrongAnswer')
                 }
             })
