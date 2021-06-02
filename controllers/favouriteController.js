@@ -4,7 +4,7 @@ class FavouriteController {
     static getAllFav (req, res, next) {
         const userId = req.activeUser.id
         Favourite.findAll({where: {UserId: userId}})
-            .then(({data}) => {
+            .then((data) => {
                 res.status(200).json(data)
             })
             .catch((err) => {

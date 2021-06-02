@@ -13,5 +13,5 @@ router.use(authentication)
 router.use('/countries', countryRouter)
 router.use('/teams', teamRouter)
 router.use('/favourites', favRouter)
-router.get('/standings', StandingController.getStandings)
+router.get('/standings/:leagueKey', StandingController.getStandings)
 module.exports = router
