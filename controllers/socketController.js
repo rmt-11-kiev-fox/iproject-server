@@ -28,23 +28,25 @@ class Controller {
             })
             socket.on('getNewQuestion', () => {
                 // isActiveServer = true
-                axios({
-                    url: 'http://localhost:3000/questions',
-                    method: 'GET'
-                })
-                    .then(({ data }) => {
-                        const { category, question, correct_answer } = data
-                        currentCorrectAnswer = correct_answer
-                        let answers = [
-                            ...data.incorrect_answers,
-                            data.correct_answer
-                        ]
-                        answers = answers.sort((a, b) => a - b)
-                        currentQuestion = {
-                            category,
-                            question,
-                            answers
-                        }
+                // axios({
+                //     url: 'http://localhost:3000/questions',
+                //     method: 'GET'
+                // })
+                //     .then(({ data }) => {
+                //         const { category, question, correct_answer } = data
+                //         currentCorrectAnswer = correct_answer
+                //         let answers = [
+                //             ...data.incorrect_answers,
+                //             data.correct_answer
+                //         ]
+                //         answers = answers.sort((a, b) => a - b)
+                //         currentQuestion = {
+                //             category,
+                //             question,
+                //             answers
+                //         }
+                Controller.getNewQuestion()
+                    .then(currentQuestion => {
                         io.sockets.emit('receiveQuestion', currentQuestion)
                     })
                     .catch(err => {
@@ -65,29 +67,14 @@ class Controller {
                     io.sockets.emit('receiveTimeLeft', counter)
                     counter--
                     if (counter < 0) {
+                        io.sockets.emit(
+                            'receiveCorrectAnswer',
+                            currentCorrectAnswer
+                        )
                         clearInterval(interval)
                         if (connectedClients.length) {
-                            axios({
-                                url: 'http://localhost:3000/questions',
-                                method: 'GET'
-                            })
-                                .then(({ data }) => {
-                                    const {
-                                        category,
-                                        question,
-                                        correct_answer
-                                    } = data
-                                    currentCorrectAnswer = correct_answer
-                                    let answers = [
-                                        ...data.incorrect_answers,
-                                        data.correct_answer
-                                    ]
-                                    answers = answers.sort((a, b) => a - b)
-                                    currentQuestion = {
-                                        category,
-                                        question,
-                                        answers
-                                    }
+                            Controller.getNewQuestion()
+                                .then(currentQuestion => {
                                     io.sockets.emit(
                                         'receiveQuestion',
                                         currentQuestion
@@ -108,22 +95,32 @@ class Controller {
                 if (answer === currentCorrectAnswer) {
                     // console.log('CORRECT ANSWER')
                     // console.log('CORRECT ANSWER:', currentCorrectAnswer)
-                    socket.emit('correctAnswer', currentCorrectAnswer)
+                    socket.emit('correctAnswer')
                 } else {
                     // console.log('WRONG ANSWER')
                     // console.log('CORRECT ANSWER:', currentCorrectAnswer)
-                    socket.emit('wrongAnswer', currentCorrectAnswer)
+                    socket.emit('wrongAnswer')
                 }
             })
         })
     }
 
-    // static getNewQuestion() {
-    //     return axios({
-    //         url: 'http://localhost:3000/questions',
-    //         method: 'GET'
-    //     })
-    // }
+    static getNewQuestion() {
+        return axios({
+            url: 'http://localhost:3000/questions',
+            method: 'GET'
+        }).then(({ data }) => {
+            const { category, question, correct_answer } = data
+            currentCorrectAnswer = correct_answer
+            let answers = [...data.incorrect_answers, data.correct_answer]
+            answers = answers.sort((a, b) => a - b)
+            return {
+                category,
+                question,
+                answers
+            }
+        })
+    }
 }
 
 module.exports = Controller
