@@ -11,16 +11,7 @@ module.exports = {
       brand: {
         type: Sequelize.STRING,
       },
-      product_id: {
-        type: Sequelize.INTEGER,
-      },
       name: {
-        type: Sequelize.STRING,
-      },
-      price: {
-        type: Sequelize.INTEGER,
-      },
-      image_url: {
         type: Sequelize.STRING,
       },
       description: {
@@ -30,9 +21,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       product_type: {
-        type: Sequelize.STRING,
-      },
-      color: {
         type: Sequelize.STRING,
       },
       product_tag: {

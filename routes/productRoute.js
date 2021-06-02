@@ -4,10 +4,10 @@ const authentication = require("../middlewares/authentication");
 const auth = require("../middlewares/authentication");
 
 router.get("/", product.getAll);
-router.get("/:categories", product.getByCategory);
-router.get("/:brands", product.getByBrand);
-router.get("/types", product.getByType);
-router.get("/:tags", product.getByTag);
+// router.get("/types", product.getByType);
+// router.get("/brands", product.getByBrand);
+// router.get("/categories", product.getByCategory);
+// router.get("/tags", product.getByTag);
 
 router.use(authentication);
 
