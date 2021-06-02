@@ -6,5 +6,8 @@ router.post("/map/suggestions", map.suggestions);
 router.get("/covid", covid.fetchAll);
 router.post("/login", user.login);
 router.post("/register", user.register);
+router.get("/", (req, res) => {
+	res.status(200).json({ message: "Welcome to Manis" });
+});
 
 module.exports = router;
