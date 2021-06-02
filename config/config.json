@@ -2,7 +2,7 @@
   "development": {
     "username": "melisa",
     "password": "postgres",
-    "database": "IProject--TEST",
+    "database": "Project-Charitable",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
