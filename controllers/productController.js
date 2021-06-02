@@ -1,4 +1,5 @@
 const { Product, User } = require("../models");
+const nodemailer = require("../helpers/nodemailer");
 const axios = require("axios");
 
 // sudo kill -9 $(sudo lsof -t -i:3000)
@@ -54,10 +55,8 @@ class productController {
   }
 
   static async addProduct(req, res, next) {
-    console.log(req.user, "<<di controller");
-    // console.log(req.body.product_id, "<<body di add");
-    // console.log(req.body, "<<body");
-    // console.log(req.body.colors, "<<<colors");
+    // console.log(req.user, "<<di controller");
+
     let id = req.user.id;
     let { brand, name, description, category, product_type, product_tag } =
       req.body;
@@ -116,6 +115,61 @@ class productController {
           message: "data not found",
         };
       }
+    } catch (err) {
+      console.log(err, "<<err");
+      next(err);
+    }
+  }
+
+  static async sendList(req, res, next) {
+    // console.log(req.user);
+    let id = +req.user.id;
+    // const { findList, findUser } = await Promise.all([
+    //   Product.findAll({ where: { UserId: id } }),
+    //   User.findByPk(id),
+    // ]);
+    try {
+      let productList = [];
+      // let list = {
+      //   name: "",
+      //   product_type: "",
+      // };
+      let userEmail = "";
+      //===getAll list===
+      let findList = await Product.findAll({ where: { UserId: id } });
+      //===cek user, ambil data email===
+      let findUser = await User.findByPk(id);
+      if (!findUser) {
+        throw {
+          name: "myError",
+          status: 404,
+          message: "unregistered user",
+        };
+      } else {
+        userEmail = findUser.email;
+      }
+
+      if (!findList) {
+        throw {
+          name: "myError",
+          status: 404,
+          message: "you have nothing on your list",
+        };
+      } else {
+        for (let i = 0; i < findList.length; i++) {
+          // console.log(findList[i].brand, "<<<list loop");
+          // list.name = findList[i].brand;
+          // list.product_type = findList[i].product_type;
+          // console.log(list, "<<<list obj");
+          // productList.push(list);
+          productList.push(findList[i].name);
+        }
+        // console.log(productList, "<<prodlist");
+      }
+
+      let text = `You have some reccomendation to try ${productList}`;
+      nodemailer(userEmail, text);
+      res.status(200).json({ message: "email already sent to user !" });
     } catch (err) {
       console.log(err, "<<err");
       next(err);

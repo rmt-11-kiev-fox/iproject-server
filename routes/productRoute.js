@@ -8,6 +8,7 @@ router.get("/", product.getAll);
 router.use(authentication);
 router.post("/add", product.addProduct);
 router.get("/myList", product.getAllRec);
+router.get("/sendList", product.sendList);
 
 router.use("/:id", authorization);
 router.delete("/:id/myList", product.delete);
