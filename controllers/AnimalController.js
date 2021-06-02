@@ -10,7 +10,7 @@ class AnimalController {
                 attributes: { exclude: ['username', 'email', 'password', 'createdAt', 'updatedAt'] },
             },
             attributes: { exclude: ['createdAt', 'updatedAt'] },
-            order: [['id', 'ASC']]
+            order: [['name', 'ASC']]
         })
         .then((animals) => {
             res.status(200).json({
