@@ -43,6 +43,19 @@ class Controller {
         }
     }
 
+    static async getAll(req, res, next) {
+        try {
+            const foundUsers = await User.findAll({
+                attributes: { exclude: ['password'] },
+                order: [['point', 'DESC']],
+                limit: 15
+            })
+            res.status(200).json(foundUsers)
+        } catch (err) {
+            next(err)
+        }
+    }
+
     static async updatePoint(req, res, next) {
         try {
             const { id } = req.params
