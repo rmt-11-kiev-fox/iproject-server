@@ -17,45 +17,63 @@ app.use(express.json());
 app.use(router);
 app.use(errorHandler);
 
-let onlineUsers = [];
-let guests = 0;
+let lobbyData = {
+    onlineUsers: [],
+    connectedUsers: 0,
+    get guestsNumber() {
+        return this.connectedUsers - this.onlineUsers.length;
+    },
+};
+
+// let onlineUsers = [];
+// let connectedUsers = 0;
 
 io.on("connection", (socket) => {
+    lobbyData.connectedUsers++;
+
+    // function getGuests() {
+    //     return lobbyData.connectedUsers - lobbyData.onlineUsers.length;
+    // }
+
     socket.on("getData", () => {
-        socket.emit("onlineUsers", onlineUsers);
-        socket.emit("guestsNumber", guests);
+        socket.emit("updateData", lobbyData);
+        // socket.emit("guestsNumber", getGuests());
     });
 
     socket.on("onLogin", (val) => {
         // console.log("masuk onlogin", val);
-        onlineUsers.push(val);
-        console.log("masuk onlogin", onlineUsers);
-        socket.email = val.email;
-        io.emit("onlineUsers", onlineUsers);
+        let userIndex = lobbyData.onlineUsers.findIndex(
+            (el) => el.email === val.email
+        );
+        // console.log(userIndex);
+        if (userIndex === -1) {
+            lobbyData.onlineUsers.push(val);
+            socket.email = val.email;
+            io.emit("updateData", lobbyData);
+            // io.emit("guestsNumber", getGuests());
+        }
     });
 
-    socket.on("disconnect", (val) => {
+    socket.on("disconnect", () => {
         console.log("a user has disconnected", socket.email);
+        lobbyData.connectedUsers--;
         if (socket.email) {
-            let userIndex = onlineUsers.findIndex(
+            let userIndex = lobbyData.onlineUsers.findIndex(
                 (el) => el.email === socket.email
             );
-            onlineUsers.splice(userIndex, 1);
-            io.emit("onlineUsers", onlineUsers);
-        } else {
-            guests -= 1;
-            io.emit("guestsNumber", guests);
+            lobbyData.onlineUsers.splice(userIndex, 1);
+            io.emit("updateData", lobbyData);
         }
+        // io.emit("guestsNumber", getGuests());
     });
 
     socket.on("guestHandler", (val) => {
-        if (!val) {
-            guests -= 1;
-            io.emit("guestsNumber", guests);
-        } else {
-            guests += 1;
-            io.emit("guestsNumber", guests);
-        }
+        io.emit("updateData", lobbyData);
+    });
+
+    socket.on("sendMessageLobby", (val) => {
+        // console.log(val);
+        socket.broadcast.emit("newLobbyMessage", val);
     });
 });
 
