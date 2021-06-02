@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 
-console.log("INside authentication");
+// console.log("INside authentication");
 const authentication = (req, res, next) => {
   try {
     let decoded = jwt.verify(req.headers.access_token, process.env.SECRET_KEY);

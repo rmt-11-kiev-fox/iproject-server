@@ -2,15 +2,18 @@ let axios = require("axios");
 
 class Controller {
   static showMovieDetail(req, res, next) {
-    let MovieId = req.body.MovieId;
-    let apiUrl = `https://api.themoviedb.org/3/movie/$${MovieId}?api_key=fcf3d00b4d1742944230e7b5210ec0c1&language=en-US`;
+    let MovieId = +req.params.movieId;
+    // console.log(MovieId, "movieId");
+    let apiUrl = `https://api.themoviedb.org/3/movie/${MovieId}?api_key=fcf3d00b4d1742944230e7b5210ec0c1&language=en-US`;
     axios
       .get(apiUrl)
-      .then((data) => {
-        res.status(200).json(data);
+      .then(({ data }) => {
+        const stringData = JSON.stringify(data);
+        const parseData = JSON.parse(stringData);
+        res.status(200).json({ data: parseData });
       })
       .catch((err) => {
-        console.log(err, "show similar movies error");
+        console.log(err, "show detail movies error");
       });
   }
   static showPopularMovies(req, res, next) {
@@ -18,11 +21,13 @@ class Controller {
       "https://api.themoviedb.org/3/movie/popular?api_key=fcf3d00b4d1742944230e7b5210ec0c1";
     axios
       .get(apiUrl)
-      .then((data) => {
-        res.status(200).json(data);
+      .then(({ data }) => {
+        const stringData = JSON.stringify(data);
+        const parseData = JSON.parse(stringData);
+        res.status(200).json({ data: parseData });
       })
       .catch((err) => {
-        console.log(err, "show movie error");
+        console.log(err, "show popular movie error");
       });
   }
   static showNowPlayingMovies(req, res, next) {
@@ -30,20 +35,25 @@ class Controller {
       "https://api.themoviedb.org/3/movie/now_playing?api_key=fcf3d00b4d1742944230e7b5210ec0c1&language=en-US";
     axios
       .get(apiUrl)
-      .then((data) => {
-        res.status(200).json(data);
+      .then(({ data }) => {
+        const stringData = JSON.stringify(data);
+        const parseData = JSON.parse(stringData);
+        res.status(200).json(parseData);
       })
       .catch((err) => {
         console.log(err, "show now playing movies error");
       });
   }
   static showSimilarMovies(req, res, next) {
-    let MovieId = req.body.MovieId;
+    let MovieId = +req.body.MovieId;
+    // console.log(req.body, "similar movies id");
     let apiUrl = `https://api.themoviedb.org/3/movie/${MovieId}/similar?api_key=fcf3d00b4d1742944230e7b5210ec0c1&language=en-US`;
     axios
       .get(apiUrl)
-      .then((data) => {
-        res.status(200).json(data);
+      .then(({ data }) => {
+        const stringData = JSON.stringify(data);
+        const parseData = JSON.parse(stringData);
+        res.status(200).json(parseData);
       })
       .catch((err) => {
         console.log(err, "show similar movies error");
