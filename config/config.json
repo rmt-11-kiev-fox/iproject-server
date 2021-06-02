@@ -1,0 +1,25 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "kickoff",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "postgres",
+    "database": "kickoff_test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable" : "DATABASE_URL",
+    "dialectOptions" : {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized" : false
+      }
+    }
+  }
+}
