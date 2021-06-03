@@ -53,6 +53,23 @@ class FavouriteController {
                 res.status(500).json({ message: err.message })
             })
     }
+
+    static deleteWatchList(req, res) {
+        // console.log(req.body.WatchlistId, '<<<<masuk controller favourite');
+        // let id = req.body.WatchlistId
+        Favourite.destroy({
+            where: {
+                id: req.body.WatchlistId
+            }
+        })
+            .then(() => {
+                res.status(200).json({ message: 'Watchlist deleted successfully' })
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: err.message })
+            })
+    }
 }
 
 module.exports = FavouriteController

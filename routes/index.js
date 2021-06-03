@@ -16,5 +16,6 @@ router.get('/nameSearch', MovieController.searchMovieByName)
 
 router.post('/watchLists', FavouriteController.addWatchList)
 router.get('/watchLists', FavouriteController.fetchDataFavourite)
+router.delete('/watchLists', FavouriteController.deleteWatchList)
 
 module.exports = router
