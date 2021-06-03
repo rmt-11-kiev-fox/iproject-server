@@ -6,7 +6,10 @@ const MoneyController = require('../controllers/money')
 router.post('/register', UserController.register)
 router.post('/login', UserController.login)
 
+router.get('/', MoneyController.getRecommendation)
+
 router.use(authentication)
+
 router.post('/incomes', MoneyController.addIncome)
 router.get('/incomes', MoneyController.showMonthlyIncomes)
 router.post('/expenses', MoneyController.addExpense)
