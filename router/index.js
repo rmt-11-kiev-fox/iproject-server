@@ -15,7 +15,7 @@ function geoAPI(coordinate) {
 }
 
 function weatherAPI(coordinate) {
-    return `api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=332c23ca490b82d8dbb2befc4f007ff3`
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=332c23ca490b82d8dbb2befc4f007ff3`
 }
 
 class BcryptPassword{
@@ -167,7 +167,9 @@ router.get('/locationPIM', (req, res, next)=>{
         res.status(200).json(
             {coordinatePIM: {
                 lat: result.data.inlatt,
-                lng: result.data.inlongt
+                lng: result.data.inlongt,
+                address: result.data.staddress,
+                postal: result.data.postal
             }
         })
     })
@@ -182,7 +184,9 @@ router.get('/locationPS', (req, res, next)=>{
         res.status(200).json(
             {coordinatePS: {
                 lat: result.data.inlatt,
-                lng: result.data.inlongt
+                lng: result.data.inlongt,
+                address: result.data.staddress,
+                postal: result.data.postal
             }
         })
     })
@@ -197,7 +201,9 @@ router.get('/locationMtg', (req, res, next)=>{
         res.status(200).json(
             {coordinateMtg: {
                 lat: result.data.inlatt,
-                lng: result.data.inlongt
+                lng: result.data.inlongt,
+                address: result.data.staddress,
+                postal: result.data.postal
             }
         })
     })
@@ -210,11 +216,8 @@ router.get('/weatherPIM', (req, res, next)=>{
     axios.get(weatherAPI(PIMCoordinate))
     .then(result=>{
         res.status(200).json(
-            {weather: {
-                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
-                dinner: result.data.data.timelines[0].intervals[16].values.temperature
-            }
-        })
+            {weather: result.data.weather[0].main}
+        )
     })
     .catch(err=>{
         console.log(err);
@@ -225,11 +228,8 @@ router.get('/weatherPS', (req, res, next)=>{
     axios.get(weatherAPI(PSCoordinate))
     .then(result=>{
         res.status(200).json(
-            {weather: {
-                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
-                dinner: result.data.data.timelines[0].intervals[16].values.temperature
-            }
-        })
+            {weather: result.data.weather[0].main}
+        )
     })
     .catch(err=>{
         console.log(err);
@@ -240,11 +240,8 @@ router.get('/weatherMtg', (req, res, next)=>{
     axios.get(weatherAPI(MtgCoordinate))
     .then(result=>{
         res.status(200).json(
-            {weather: {
-                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
-                dinner: result.data.data.timelines[0].intervals[16].values.temperature
-            }
-        })
+            {weather: result.data.weather[0].main}
+        )
     })
     .catch(err=>{
         console.log(err);
