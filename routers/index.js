@@ -1,3 +1,4 @@
+const NewsController = require('../controllers/newsController')
 const StandingController = require('../controllers/standingsController')
 const authentication = require('../middlewares/auth')
 const countryRouter = require('./countryRouter')
@@ -14,4 +15,5 @@ router.use('/countries', countryRouter)
 router.use('/teams', teamRouter)
 router.use('/favourites', favRouter)
 router.get('/standings/:leagueKey', StandingController.getStandings)
+router.get('/news', NewsController.getNews)
 module.exports = router
