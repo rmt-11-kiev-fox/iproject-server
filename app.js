@@ -108,6 +108,17 @@ io.on("connection", (socket) => {
         // });
         io.emit("updateData", lobbyData);
     });
+
+    socket.on("deleteRoom", (val) => {
+        let roomIndex = lobbyData.rooms.findIndex(
+            (el) => el.roomId === val.roomId
+        );
+        if (roomIndex !== -1) {
+            // console.log("masuk splice index");
+            lobbyData.rooms.splice(roomIndex, 1);
+        }
+        io.emit("updateData", lobbyData);
+    });
 });
 
 httpServer.listen(port, () => {
