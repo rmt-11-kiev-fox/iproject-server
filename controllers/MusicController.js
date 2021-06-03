@@ -9,7 +9,7 @@ class Controller {
             let ytSearch = await searcher.search(searchDetails);
             res.status(200).json({ results: ytSearch.currentPage });
         } catch (error) {
-            console.log(error, "ini yt error");
+            // console.log(error, "ini yt error");
             next(error);
         }
     }
@@ -23,7 +23,7 @@ class Controller {
             });
             if (findLyrics) res.status(200).json(findLyrics.data);
         } catch (error) {
-            console.log(error, "ini di searchLyrics");
+            // console.log(error, "ini di searchLyrics");
             next(error);
         }
     }
