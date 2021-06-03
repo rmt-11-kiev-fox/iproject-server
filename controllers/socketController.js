@@ -1,5 +1,6 @@
 'use strict'
 const axios = require('axios')
+const { Chat } = require('../models')
 let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
@@ -40,7 +41,6 @@ class Controller {
                 socket.emit('receiveServerStatus', isActiveServer)
             })
             socket.on('getCurrentQuestion', () => {
-                // console.log('MASUK SINI', '<<<<<')
                 socket.emit('receiveQuestion', currentQuestion)
             })
             socket.on('startTrivia', () => {
@@ -84,19 +84,44 @@ class Controller {
                 const { id, point } = currentUser
                 let newPoint
                 if (answer === currentCorrectAnswer) {
-                    newPoint = point + timeLeft * 10
-                    socket.emit('correctAnswer', {
-                        newPoint,
-                        increment: timeLeft * 10
-                    })
+                    const increment = timeLeft * 10
+                    newPoint = point + increment
+                    Controller.updatePoint(id, newPoint)
+                        .then(() => {
+                            return Chat.create({
+                                message: `${currentUser.username} got ${increment} points!`
+                                // message: `${currentUser.username} guessed the correct answer and got ${increment} points! ${currentUser.username} has ${newPoint} points now!`
+                            })
+                        })
+                        .then(() => {
+                            socket.emit('correctAnswer', {
+                                newPoint,
+                                increment
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 } else {
-                    newPoint = point - 10
-                    socket.emit('wrongAnswer', {
-                        newPoint,
-                        decrement: -10
-                    })
+                    const decrement = -20
+                    newPoint = point + decrement
+                    Controller.updatePoint(id, newPoint)
+                        .then(() => {
+                            return Chat.create({
+                                message: `${currentUser.username} got ${decrement} points!`
+                                // message: `${currentUser.username} guessed the wrong answer and got ${decrement} points! ${currentUser.username} has ${newPoint} points now!`
+                            })
+                        })
+                        .then(() => {
+                            socket.emit('wrongAnswer', {
+                                newPoint,
+                                decrement
+                            })
+                        })
+                        .catch(err => {
+                            console.log(err)
+                        })
                 }
-                Controller.updatePoint(id, newPoint)
             })
         })
     }
