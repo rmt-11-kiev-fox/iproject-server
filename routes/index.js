@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Controller = require('../controllers/controller')
+const APIController = require('../controllers/APIcontroller')
 const Authentication = require('../middlewares/authentication')
 const Authorization = require('../middlewares/authorization')
 
@@ -9,5 +10,7 @@ router.post('/login', Controller.login)
 router.use(Authentication)
 router.post('/collect', Controller.createCollect)
 router.get('/collect', Controller.showCollect)
+
+router.get('/quotes', APIController.quotes)
 
 module.exports = router
