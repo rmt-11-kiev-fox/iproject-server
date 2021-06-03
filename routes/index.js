@@ -12,5 +12,6 @@ router.post('/collect', Controller.createCollect)
 router.get('/collect', Controller.showCollect)
 
 router.get('/quotes', APIController.quotes)
+router.get('/location', APIController.location)
 
 module.exports = router

@@ -10,6 +10,15 @@ class APIController {
             next(err)
         })
     }
+    static location(req, res, next) {
+        axios.get(`https://api.ipgeolocation.io/ipgeo?apiKey=${process.env.API_KEY}`)
+        .then(data => {
+            res.status(200).json({long: data.data.longitude, lat: data.data.latitude})
+        })
+        .catch(err => {
+            next(err)
+        })
+    }
 }
 
 module.exports = APIController

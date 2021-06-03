@@ -7,7 +7,7 @@ class Controller {
     static register(req, res, next) {
         const {email, password, name, address, category, message} = req.body
         User.create({
-            email, password, name, address, category
+            email, password, name, address, category, message
         })
         .then(user => {
             res.status(201).json({id: user.id, name: user.name, email: user.email, address: user.address, category: user.category, message: user.message})
