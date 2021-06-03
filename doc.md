@@ -998,3 +998,85 @@ none
    msg: "internal server error"
 }
 ```
+
+### GET /all-product-filter
+
+### _Request Header_
+
+```
+{
+    access_token: <string>
+}
+```
+
+### \_Request Query
+
+```
+{
+    size: 2,
+    page: 1,
+    text:ss,
+    category:ss,
+    status:all
+}
+```
+
+### _Request Body_
+
+```
+none
+```
+
+### _Response (200)_
+
+```
+{
+    "count": 3,
+    "cards": [
+        {
+            "id": 2,
+            "name": "test",
+            "ob": 2,
+            "bid": 10000,
+            "winner": null,
+            "status": true,
+            "currentBid": 2,
+            "bin": 33,
+            "image": "http://res.cloudinary.com/dfh39qfib/image/upload/v1622684905/xozmm6nvvcwq3eunf6f3.jpg",
+            "category": "other",
+            "dueDate": 86400,
+            "UserId": 1,
+            "createdAt": "2021-06-03T01:48:29.250Z",
+            "updatedAt": "2021-06-03T01:48:29.250Z"
+        },
+        {
+            "id": 3,
+            "name": "we",
+            "ob": 2,
+            "bid": 50000,
+            "winner": null,
+            "status": true,
+            "currentBid": 2,
+            "bin": 3,
+            "image": "http://res.cloudinary.com/dfh39qfib/image/upload/v1622685626/otijrhxil4nk2wdgxwlo.jpg",
+            "category": "pakaian",
+            "dueDate": 86400,
+            "UserId": 1,
+            "createdAt": "2021-06-03T02:00:30.657Z",
+            "updatedAt": "2021-06-03T02:00:30.657Z"
+        }
+    ]
+}
+```
+
+### _Error (500 - Internal Server Error)_
+
+```
+{
+    "errors": {
+        "name": "Get Product Failed",
+        "status": 500,
+        "message": "Internal Server Error"
+    }
+}
+```
