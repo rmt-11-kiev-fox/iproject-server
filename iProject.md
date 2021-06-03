@@ -229,92 +229,127 @@ Method: GET
         "flag": "https://static.abstractapi.com/country-flags/ID_flag.png"
     },
     "weather": {
-        "id": 802,
+        "id": 804,
         "main": "Clouds",
-        "icon": "https://openweathermap.org/img/wn/03n@2x.png"
+        "description": "overcast clouds",
+        "icon": "https://openweathermap.org/img/wn/04d@2x.png",
+        "temperature": "25 Celcius"
     },
     "querySearch": [
         {
-            "id": 193962552,
-            "query": "https://www.youtube.com/results?search_query=Menghapus+Jejakmu"
+            "id": 29,
+            "apiId": 36312179,
+            "query": "4gC95tJcg0TWAz3LJ2dZpN",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 92446668,
-            "query": "https://www.youtube.com/results?search_query=Sahur+Tiba"
+            "id": 45,
+            "apiId": 103064721,
+            "query": "3YBZIN3rekqsKxbJc9FZko",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 201240829,
-            "query": "https://www.youtube.com/results?search_query=Belum+Siap+Kehilangan"
+            "id": 24,
+            "apiId": 75908694,
+            "query": "65OKBR5PHenXHwz84xJDHm",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 92446678,
-            "query": "https://www.youtube.com/results?search_query=Lebaran+Sebentar+Lagi"
+            "id": 60,
+            "apiId": 177783033,
+            "query": "1kPpge9JDLpcj15qgrPbYX",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 134321680,
-            "query": "https://www.youtube.com/results?search_query=Di+Persimpangan+Dilema"
+            "id": 25,
+            "apiId": 54732556,
+            "query": "3p3B7xAxKSJK5kQ6RMYczr",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 79479247,
-            "query": "https://www.youtube.com/results?search_query=Perahu+Kertas+"
+            "id": 50,
+            "apiId": 85298705,
+            "query": "3YRCqOhFifThpSRFJ1VWFM",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 147780362,
-            "query": "https://www.youtube.com/results?search_query=Memandang+Surga"
+            "id": 9,
+            "apiId": 137043871,
+            "query": "6PkOmPMlH5nPFeoCPU0lo2",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 147780366,
-            "query": "https://www.youtube.com/results?search_query=Sempurna"
+            "id": 15,
+            "apiId": 198461341,
+            "query": "5JxW9yxkVqHa9IlUlXDh4Z",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         },
         {
-            "id": 80837688,
-            "query": "https://www.youtube.com/results?search_query=Lapang+Dada"
-        },
-        {
-            "id": 80837690,
-            "query": "https://www.youtube.com/results?search_query=Musim+Yang+Baik"
+            "id": 29,
+            "apiId": 36312179,
+            "query": "4gC95tJcg0TWAz3LJ2dZpN",
+            "createdAt": "2021-06-02T18:40:00.315Z",
+            "updatedAt": "2021-06-02T18:40:00.315Z"
         }
     ],
     "dataForTitle": [
         {
             "id": 193962552,
-            "title": "Menghapus Jejakmu"
+            "title": "Menghapus Jejakmu",
+            "query": "https://www.youtube.com/results?search_query=Menghapus+Jejakmu"
         },
         {
             "id": 92446668,
-            "title": "Sahur Tiba"
+            "title": "Sahur Tiba",
+            "query": "https://www.youtube.com/results?search_query=Sahur+Tiba"
         },
         {
             "id": 201240829,
-            "title": "Belum Siap Kehilangan"
+            "title": "Belum Siap Kehilangan",
+            "query": "https://www.youtube.com/results?search_query=Belum+Siap+Kehilangan"
         },
         {
             "id": 92446678,
-            "title": "Lebaran Sebentar Lagi"
+            "title": "Lebaran Sebentar Lagi",
+            "query": "https://www.youtube.com/results?search_query=Lebaran+Sebentar+Lagi"
         },
         {
             "id": 134321680,
-            "title": "Di Persimpangan Dilema"
+            "title": "Di Persimpangan Dilema",
+            "query": "https://www.youtube.com/results?search_query=Di+Persimpangan+Dilema"
         },
         {
             "id": 79479247,
-            "title": "Perahu Kertas "
+            "title": "Perahu Kertas ",
+            "query": "https://www.youtube.com/results?search_query=Perahu+Kertas+"
         },
         {
             "id": 147780362,
-            "title": "Memandang Surga"
+            "title": "Memandang Surga",
+            "query": "https://www.youtube.com/results?search_query=Memandang+Surga"
         },
         {
             "id": 147780366,
-            "title": "Sempurna"
+            "title": "Sempurna",
+            "query": "https://www.youtube.com/results?search_query=Sempurna"
         },
         {
             "id": 80837688,
-            "title": "Lapang Dada"
+            "title": "Lapang Dada",
+            "query": "https://www.youtube.com/results?search_query=Lapang+Dada"
         },
         {
             "id": 80837690,
-            "title": "Musim Yang Baik"
+            "title": "Musim Yang Baik",
+            "query": "https://www.youtube.com/results?search_query=Musim+Yang+Baik"
         }
     ]
 }

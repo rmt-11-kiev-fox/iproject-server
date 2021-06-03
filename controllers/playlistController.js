@@ -1,5 +1,6 @@
-const { Playlist, User } = require("../models");
+const { Playlist } = require("../models");
 
+// Class ini akan hanya sample, digunakan hanya untuk latihan
 class PlaylistController {
     static async addPlaylist(req, res) {
         const playlistAdded = {

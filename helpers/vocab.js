@@ -5,7 +5,7 @@ const genreChecking = (mainweahter) => {
         case "Drizzle":
             return "100003";
         case "Rain":
-            return "Instrumental";
+            return "53";
         case "Snow":
             return "53";
         case "Mist":
