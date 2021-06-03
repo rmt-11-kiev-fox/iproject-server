@@ -1,7 +1,13 @@
 'use strict'
 const axios = require('axios')
 const { Chat } = require('../models')
-const baseUrl = process.env.DEPLOY_LINK || 'http://localhost:3000'
+let baseUrl = process.env.DEPLOY_URL
+    ? 'https://triviasiks.herokuapp.com'
+    : 'http://localhost:3000'
+// let baseUrl
+// if ()
+
+// process.env.DEPLOY_URL || 'http://localhost:3000'
 let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
