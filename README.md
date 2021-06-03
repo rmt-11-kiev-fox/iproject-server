@@ -1,2 +1,6 @@
-# iproject-server
-API server for Individual Project
+# IProject-Server
+API server for Individual Portfolio Project
+
+
+## Link Deploy: 
+https://beehive-server-iproject.herokuapp.com/
