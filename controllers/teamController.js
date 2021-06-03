@@ -15,7 +15,6 @@ class TeamController {
     }
 
     static getTeamByTeamKey (req, res, next) {
-        console.log('masuuuukkk');
         const team_id = +req.params.teamKey
         axios({
             url: `https://apiv3.apifootball.com/?action=get_teams&team_id=${team_id}&APIkey=${process.env.API_KEY}`,
