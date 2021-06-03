@@ -2,10 +2,6 @@
 
 API server for Individual Project
 
-# iProject-server
-
-iProject API
-
 # POST/register
 
 _request body_
