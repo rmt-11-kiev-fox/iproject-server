@@ -339,3 +339,89 @@ _Response (500 - Internal Server Error)_
 }
 ```
 ---
+
+
+### POST /watchLists
+
+> Add data movie to watch list
+
+_Request Header_
+```
+{
+  "access_token": "<your access token>"
+}
+```
+
+_Request Params_
+```
+not needed
+```
+
+_Request Body_
+```
+{
+    "title": <movie title>
+}
+```
+
+_Response (200 - OK)_
+```
+{
+    "id": 2,
+    "title": "CRUELLA",
+    "imageUrl": "https://www.jadwalnonton.com/data/images/movies/2021/cruella-c4e408ae_300x450.jpg",
+    "UserId": 1,
+    "updatedAt": "2021-06-03T05:20:26.304Z",
+    "createdAt": "2021-06-03T05:20:26.304Z"
+}
+```
+
+_Response (500 - Internal Server Error)_
+```
+{
+  "message": "Internal Server Error"
+}
+```
+---
+
+
+### GET /watchLists
+
+> Get all data watch list
+
+_Request Header_
+```
+{
+  "access_token": "<your access token>"
+}
+```
+
+_Request Params_
+```
+not needed
+```
+
+_Request Body_
+```
+not needed
+```
+
+_Response (200 - OK)_
+```
+[
+    {
+        "id": 2,
+        "title": "CRUELLA",
+        "imageUrl": "https://www.jadwalnonton.com/data/images/movies/2021/cruella-c4e408ae_300x450.jpg",
+        "UserId": 1
+    }
+]
+```
+
+_Response (500 - Internal Server Error)_
+```
+{
+  "message": "Internal Server Error"
+}
+```
+---
