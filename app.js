@@ -26,37 +26,26 @@ let lobbyData = {
     rooms: [],
 };
 
-// let onlineUsers = [];
-// let connectedUsers = 0;
-
 io.on("connection", (socket) => {
     lobbyData.connectedUsers++;
 
-    // function getGuests() {
-    //     return lobbyData.connectedUsers - lobbyData.onlineUsers.length;
-    // }
-
     socket.on("getData", () => {
         socket.emit("updateData", lobbyData);
-        // socket.emit("guestsNumber", getGuests());
     });
 
     socket.on("onLogin", (val) => {
-        // console.log("masuk onlogin", val);
         let userIndex = lobbyData.onlineUsers.findIndex(
             (el) => el.email === val.email
         );
-        // console.log(userIndex);
+
         if (userIndex === -1) {
             lobbyData.onlineUsers.push(val);
             socket.email = val.email;
             io.emit("updateData", lobbyData);
-            // io.emit("guestsNumber", getGuests());
         }
     });
 
     socket.on("disconnect", () => {
-        // console.log("a user has disconnected", socket.email);
         lobbyData.connectedUsers--;
         if (socket.email) {
             let userIndex = lobbyData.onlineUsers.findIndex(
@@ -65,7 +54,6 @@ io.on("connection", (socket) => {
             lobbyData.onlineUsers.splice(userIndex, 1);
         }
         io.emit("updateData", lobbyData);
-        // io.emit("guestsNumber", getGuests());
     });
 
     socket.on("guestHandler", (val) => {
@@ -73,7 +61,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("sendMessageLobby", (val) => {
-        // console.log(val);
         socket.broadcast.emit("newLobbyMessage", val);
     });
 
@@ -88,7 +75,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("createRoom", (val) => {
-        // console.log(val);
         const roomId = lobbyData.rooms.length
             ? lobbyData.rooms[lobbyData.rooms.length - 1].roomId + 1
             : 1;
@@ -107,8 +93,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("joinRoom", (val) => {
-        // joinRoom and roomUpdates dijadiin satu.
-        // console.log(val, "ini val");
         let roomIndex = lobbyData.rooms.findIndex(
             (el) => el.roomId === val.roomId
         );
@@ -116,6 +100,7 @@ io.on("connection", (socket) => {
             console.log("masuk room index");
             lobbyData.rooms[roomIndex] = val;
         }
+
         // socket.join(val.roomId, (y) => {
         //     io.sockets
         //         .in(val.roomId)
