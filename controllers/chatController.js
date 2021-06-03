@@ -31,15 +31,15 @@ class Controller {
         }
     }
 
-    static async postSocket(req, res, next) {
-        try {
-            const { message } = req.body
-            const newChat = await Chat.create({ message })
-            res.status(201).json(newChat)
-        } catch (err) {
-            next(err)
-        }
-    }
+    // static async postSocket(req, res, next) {
+    //     try {
+    //         const { message } = req.body
+    //         const newChat = await Chat.create({ message })
+    //         res.status(201).json(newChat)
+    //     } catch (err) {
+    //         next(err)
+    //     }
+    // }
 }
 
 module.exports = Controller
