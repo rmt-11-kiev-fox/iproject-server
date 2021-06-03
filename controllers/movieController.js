@@ -52,24 +52,24 @@ class MovieController {
     static searchMovieByName(req, res) {
         console.log(req.query.query);
         console.log(req.query.page);
-        console.log(req.params);
-        console.log(req.body);
-        // axios({
-        //     url: 'https://advanced-movie-search.p.rapidapi.com/search/movie',
-        //     method: 'GET',
-        //     params: {query: 'kong', page: '1'},
-        //     headers: {
-        //         'x-rapidapi-key': '7271e4e735msh9fa9ed372c92e91p15f594jsn2b4acb379336',
-        //         'x-rapidapi-host': 'advanced-movie-search.p.rapidapi.com'
-        //     }
-        // })
-        //     .then(movies => {
-        //         console.log(movies);
-        //     })
-        //     .catch(err => {
-        //         console.log(err);
-        //         res.status(500).json({ message: err.message })
-        //     })
+        axios({
+            url: 'https://advanced-movie-search.p.rapidapi.com/search/movie',
+            method: 'GET',
+            params: {query: req.query.query, page: req.query.page},
+            headers: {
+                'x-rapidapi-key': '7271e4e735msh9fa9ed372c92e91p15f594jsn2b4acb379336',
+                'x-rapidapi-host': 'advanced-movie-search.p.rapidapi.com'
+            }
+        })
+            .then(movies => {
+                // console.log(JSON.stringify(movies.data.results, null, 2));
+                let response = movies.data.results
+                res.status(200).json(response)
+            })
+            .catch(err => {
+                console.log(err);
+                res.status(500).json({ message: err.message })
+            })
     }
 }
 

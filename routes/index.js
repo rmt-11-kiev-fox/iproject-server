@@ -8,8 +8,8 @@ router.post('/register', UserController.register)
 router.post('/login', UserController.login)
 
 router.use(authentication)
-router.get('/nowPlayings', MovieController.fetchNowPlaying)
 router.get('/comingSoons', MovieController.fetchComingSoonMovie)
+router.get('/nowPlayings', MovieController.fetchNowPlaying)
 router.get('/cinemas', MovieController.fetchCinema)
 router.get('/nameSearch', MovieController.searchMovieByName)
 
