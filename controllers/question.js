@@ -38,11 +38,10 @@ class Controller {
             return questionIDs
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async getQuestion (req, res, next) {
-        console.log(req.body);
         let alphabet = ['a', 'b', 'c', 'd']
         let GameId = req.body.GameId
         try{
@@ -62,7 +61,7 @@ class Controller {
             res.status(200).json(question)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async answerQuestion (req, res, next){
@@ -84,7 +83,7 @@ class Controller {
             res.status(200).json(updatedData)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
 }

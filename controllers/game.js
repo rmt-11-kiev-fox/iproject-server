@@ -14,13 +14,10 @@ class Controller {
             res.status(201).json(sessionCreated)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async updateGameScore(req, res, next){
-        console.log("HERE UPDATE");
-        console.log(req.body);
-        console.log("HEYHEY");
         let gameId = req.body.gameId
         let score = 0
         try{
@@ -50,7 +47,7 @@ class Controller {
             res.status(200).json(updatedData)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async getGameStats(req, res, next){
@@ -66,7 +63,7 @@ class Controller {
             res.status(200).json(data)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
 }

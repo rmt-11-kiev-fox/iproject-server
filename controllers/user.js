@@ -101,7 +101,7 @@ class Controller{
             res.status(200).json(data)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async getSelfProfile(req, res, next){
@@ -116,7 +116,7 @@ class Controller{
             res.status(200).json(data)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
 

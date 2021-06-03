@@ -12,7 +12,7 @@ class Controller{
             res.status(200).json(scores)
         }
         catch(err){
-            console.log(err);
+            next(err);
         }
     }
     static async mostPlayed(req, res, next){
@@ -34,7 +34,7 @@ class Controller{
             res.status(200).json({message:"okay", mostPlayedData})
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
     static async leaderboards(req, res, next) {
@@ -61,7 +61,7 @@ class Controller{
             res.status(200).json(leaderboardsData)
         }
         catch(err){
-            console.log(err);
+            next(err)
         }
     }
 }
