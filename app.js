@@ -46,7 +46,6 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        // console.log("a user has disconnected", socket.email);
         lobbyData.connectedUsers--;
         if (socket.email) {
             let userIndex = lobbyData.onlineUsers.findIndex(
@@ -66,7 +65,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("userLogout", (val) => {
-        console.log(val, socket.email);
+        // console.log(val, socket.email);
         let userIndex = lobbyData.onlineUsers.findIndex(
             (el) => el.email === val.email
         );
@@ -98,7 +97,7 @@ io.on("connection", (socket) => {
             (el) => el.roomId === val.roomId
         );
         if (roomIndex !== -1) {
-            console.log("masuk room index");
+            // console.log("masuk room index");
             lobbyData.rooms[roomIndex] = val;
         }
 
