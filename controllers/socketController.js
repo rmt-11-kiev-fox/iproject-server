@@ -1,6 +1,10 @@
 'use strict'
 const axios = require('axios')
 const { Chat } = require('../models')
+const baseUrl =
+    process.env.NODE_ENV === 'production'
+        ? 'https://triviasiks.herokuapp.com'
+        : 'http://localhost:3000'
 let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
@@ -142,7 +146,7 @@ class Controller {
 
     static getNewQuestion() {
         return axios({
-            url: 'http://localhost:3000/questions',
+            url: `${baseUrl}/questions`,
             method: 'GET'
         }).then(({ data }) => {
             const { category, question, correct_answer } = data
@@ -159,7 +163,7 @@ class Controller {
 
     static updatePoint(UserId, point) {
         return axios({
-            url: `http://localhost:3000/users/${UserId}`,
+            url: `${baseUrl}/users/${UserId}`,
             method: 'PATCH',
             headers: {
                 socket_key: process.env.SOCKET_AUTH_KEY
