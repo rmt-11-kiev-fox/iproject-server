@@ -126,6 +126,17 @@ class Controller {
                         })
                 }
             })
+            socket.on('createCorrectAnswerMessage', correctAnswer => {
+                return Chat.create({
+                    message: `Correct answer: ${correctAnswer}`
+                })
+                    .then(() => {
+                        io.sockets.emit('fetchChats')
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            })
         })
     }
 

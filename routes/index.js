@@ -9,14 +9,12 @@ router.get('/', (req, res) => {
 const userRouter = require('./userRoutes')
 const questionRouter = require('./questionRoutes')
 const chatRouter = require('./chatRoutes')
-const socketRouter = require('./socketRoutes')
 
 const userController = require('../controllers/userController')
 const { authenticate } = require('../middlewares/auth')
 
 router.use(userRouter)
-router.use('/questions', questionRouter) // dari socket, public
-router.use(socketRouter)
+router.use('/questions', questionRouter) // from socket, public
 
 router.use(authenticate)
 router.get('/users', userController.getAll)
