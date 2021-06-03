@@ -8,6 +8,7 @@ const {
   getOneProduct,
   getAllProduct,
   changeStatusProduct,
+  getAllFilteredProduct,
 } = ProductController;
 const { authentication } = require("../middlewares/authentications");
 const { authorizationProduct } = require("../middlewares/authorizations");
@@ -15,6 +16,7 @@ const { authorizationProduct } = require("../middlewares/authorizations");
 routes.use(authentication);
 
 routes.get("/all-product", getAllProduct);
+routes.get("/all-product-filter/", getAllFilteredProduct);
 routes.get("/products", getProduct);
 routes.post("/products", createProduct);
 routes.get("/products/:id", getOneProduct);

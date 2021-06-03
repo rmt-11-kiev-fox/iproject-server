@@ -1,4 +1,6 @@
 const { Product, Auction } = require("../models");
+var Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 class ProductController {
   static async createProduct(req, res, next) {
@@ -225,6 +227,40 @@ class ProductController {
       });
       res.status(200).json({ count: getData.count, cards: getData.rows });
     } catch (error) {
+      next({
+        name: "Get Product Failed",
+        code: 500,
+        message: "Internal Server Error",
+      });
+    }
+  }
+
+  static async getAllFilteredProduct(req, res, next) {
+    try {
+      console.log(req.query);
+      let params = {};
+      if (req.query.text) {
+        params.name = {
+          [Op.like]: req.query.text,
+        };
+      }
+
+      if (req.query.status !== "all") {
+        params.status = req.query.status === "going";
+      }
+
+      if (req.query.category !== "all") {
+        params.category = req.query.category;
+      }
+
+      const getData = await Product.findAndCountAll({
+        limit: Number(req.query.size),
+        offset: Number(req.query.page) * Number(req.query.size),
+        where: params,
+      });
+      res.status(200).json({ count: getData.count, cards: getData.rows });
+    } catch (error) {
+      console.log(error);
       next({
         name: "Get Product Failed",
         code: 500,
