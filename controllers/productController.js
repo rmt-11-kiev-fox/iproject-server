@@ -107,7 +107,7 @@ class productController {
   }
   // update status product only admin
   static updateStatus(req,res, next){
-   
+      const io = req.app.get('io');
       let {id} = req.params
       let {status} = req.body
       Product.update({status}, {where: {id}, returning:true})
@@ -120,6 +120,9 @@ class productController {
           })
   
         } else {
+          if(status === 'closed'){
+            io.emit(`endBidTime-${id}`, {id, status})
+          }
           res.status(200).json(data)
         }
       })
