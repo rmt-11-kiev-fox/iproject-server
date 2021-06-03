@@ -3,7 +3,7 @@ const Controller = require('../controllers/controller')
 const router = express.Router()
 
 router.get('/result', Controller.result)
-router.post('/sendEmail', Controller.sendEmail)
 router.get('/exchangeRate', Controller.exchangeRate)
+router.post('/sendEmail', Controller.sendEmail)
 
 module.exports = router

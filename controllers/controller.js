@@ -92,7 +92,7 @@ class Controller {
     }
     transporter.sendMail(mailOptions, (err, info) => {
       if (err) throw res.status(500).json(err.response)
-      res.status(201).json('Email sent: ' + info.response)
+      res.status(201).json({message: `Email sent:  + ${info.response}`})
     })
   }
 
@@ -105,9 +105,8 @@ class Controller {
       res.status(200).json({USD_IDR: response.data.USD_IDR})
     })
     .catch(err => {
-      console.log(err);
       // Invalid API key
-      res.status(400).json(err.response.data.error)
+      res.status(400).json({message: err.response.data.error})
     })
   }
 }
