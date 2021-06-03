@@ -55,7 +55,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("disconnect", () => {
-        console.log("a user has disconnected", socket.email);
+        // console.log("a user has disconnected", socket.email);
         lobbyData.connectedUsers--;
         if (socket.email) {
             let userIndex = lobbyData.onlineUsers.findIndex(
