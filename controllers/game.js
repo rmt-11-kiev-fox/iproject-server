@@ -30,7 +30,7 @@ class Controller {
                     score++
                 }
             })
-            score = Math.floor((score*10)/questionData.length)
+            score = Math.round((score*10)/questionData.length)
             let gameDetail = await Game.findOne({
                 where:{
                     id:gameId

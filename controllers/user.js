@@ -1,6 +1,7 @@
 const {User} = require("../models")
 const {decode} = require("../helpers/bcrypt")
 const {sign} = require("../helpers/jwt")
+const nodemailer = require("nodemailer")
 
 class Controller{
     static registerUser(req, res, next) {
@@ -13,6 +14,30 @@ class Controller{
         User
         .create(userData)
         .then((data)=>{
+            //NODEMAILER
+            let transporter = nodemailer.createTransport({
+                service: 'gmail',
+                port: 465,
+                secure: true, // use SSL
+                auth: {
+                    user: 'hacktiv8burneremail@gmail.com',
+                    pass: '12ChairmanFaza'
+                }
+            });
+            let mailOptions = {
+                from: 'hacktiv8burneremail@gmail.com',
+                to: 'renaissancegame.hacktiv@yahoo.com', 
+                subject: 'Renaissance Game',
+                text: 'Terima Kasih telah menjadi member Renaissance Game, selamat bermain'
+            };
+            transporter.sendMail(mailOptions, (err, data) => {
+                if (err) {
+                    console.log('Error occurs', err);
+                } else {
+                    console.log('Email sent!!!');
+                }
+            });
+            //NODEMAILER
             res.status(201).json({
                 name:data.name,
                 msg:"Account Created"
@@ -66,6 +91,21 @@ class Controller{
     }
     static async getProfile(req, res, next){
         let id = req.body.UserId
+        try{
+            let userData = await User.findByPk(id)
+            let data = {
+                name: userData.name,
+                email: userData.email,
+                achievement: userData.achievement
+            }
+            res.status(200).json(data)
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    static async getSelfProfile(req, res, next){
+        let id = req.user.id
         try{
             let userData = await User.findByPk(id)
             let data = {
