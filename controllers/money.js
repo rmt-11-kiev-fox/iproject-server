@@ -88,7 +88,7 @@ class MoneyController {
     try {
       const monthlyIncomes = await Income.findAll({ where: { period }, order: [['createdAt', 'ASC']] })
       if (!monthlyIncomes) {
-        throw ({ status: 404, message: `You haven't submit any Income for this period!` })
+        throw ({ status: 400, message: `You haven't submit any Income for this period!` })
       } else {
         res.status(200).json(monthlyIncomes)
       }
@@ -102,7 +102,7 @@ class MoneyController {
     try {
       const monthlyExpenses = await Expense.findAll({ where: { period }, order: [['createdAt', 'ASC']] })
       if (!monthlyExpenses) {
-        throw ({ status: 404, message: `You haven't submit any Expenses for this period!` })
+        throw ({ status: 400, message: `You haven't submit any Expenses for this period!` })
       } else {
         res.status(200).json(monthlyExpenses)
       }
