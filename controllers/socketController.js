@@ -1,6 +1,10 @@
 'use strict'
 const axios = require('axios')
 const { Chat } = require('../models')
+const baseUrl =
+    process.env.NODE_ENV === 'production'
+        ? 'https://triviasiks.herokuapp.com'
+        : 'http://localhost:3000'
 let isActiveServer = false
 let currentCorrectAnswer
 let currentQuestion = {
@@ -55,29 +59,37 @@ class Controller {
                     io.sockets.emit('receiveTimeLeft', counter)
                     counter--
                     if (counter < 0) {
-                        io.sockets.emit(
-                            'receiveCorrectAnswer',
-                            currentCorrectAnswer
-                        )
-                        clearInterval(interval)
-                        if (connectedClients.length) {
-                            Controller.getNewQuestion()
-                                .then(result => {
-                                    currentQuestion = result
-                                    io.sockets.emit(
-                                        'receiveQuestion',
-                                        currentQuestion
-                                    )
-                                    counter = 10
-                                    io.sockets.emit('receiveTimeLeft', counter)
-                                    interval = setInterval(timer, 1000)
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                })
-                        } else {
-                            isActiveServer = false
-                        }
+                        return Chat.create({
+                            message: `Correct answer: ${currentCorrectAnswer}`
+                        })
+                            .then(() => {
+                                io.sockets.emit('fetchChats')
+                                clearInterval(interval)
+                                if (connectedClients.length) {
+                                    Controller.getNewQuestion()
+                                        .then(result => {
+                                            currentQuestion = result
+                                            io.sockets.emit(
+                                                'receiveQuestion',
+                                                currentQuestion
+                                            )
+                                            counter = 10
+                                            io.sockets.emit(
+                                                'receiveTimeLeft',
+                                                counter
+                                            )
+                                            interval = setInterval(timer, 1000)
+                                        })
+                                        .catch(err => {
+                                            console.log(err)
+                                        })
+                                } else {
+                                    isActiveServer = false
+                                }
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
                 }
                 let interval = setInterval(timer, 1000)
@@ -126,23 +138,15 @@ class Controller {
                         })
                 }
             })
-            socket.on('createCorrectAnswerMessage', correctAnswer => {
-                return Chat.create({
-                    message: `Correct answer: ${correctAnswer}`
-                })
-                    .then(() => {
-                        io.sockets.emit('fetchChats')
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            })
+            // socket.on('createCorrectAnswerMessage', correctAnswer => {
+
+            // })
         })
     }
 
     static getNewQuestion() {
         return axios({
-            url: 'http://localhost:3000/questions',
+            url: `${baseUrl}/questions`,
             method: 'GET'
         }).then(({ data }) => {
             const { category, question, correct_answer } = data
@@ -159,7 +163,7 @@ class Controller {
 
     static updatePoint(UserId, point) {
         return axios({
-            url: `http://localhost:3000/users/${UserId}`,
+            url: `${baseUrl}/users/${UserId}`,
             method: 'PATCH',
             headers: {
                 socket_key: process.env.SOCKET_AUTH_KEY
