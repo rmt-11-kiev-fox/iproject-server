@@ -41,7 +41,6 @@ class Controller {
                 socket.emit('receiveServerStatus', isActiveServer)
             })
             socket.on('getCurrentQuestion', () => {
-                // console.log('MASUK SINI', '<<<<<')
                 socket.emit('receiveQuestion', currentQuestion)
             })
             socket.on('startTrivia', () => {
