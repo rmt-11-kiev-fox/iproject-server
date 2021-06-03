@@ -59,29 +59,37 @@ class Controller {
                     io.sockets.emit('receiveTimeLeft', counter)
                     counter--
                     if (counter < 0) {
-                        io.sockets.emit(
-                            'receiveCorrectAnswer',
-                            currentCorrectAnswer
-                        )
-                        clearInterval(interval)
-                        if (connectedClients.length) {
-                            Controller.getNewQuestion()
-                                .then(result => {
-                                    currentQuestion = result
-                                    io.sockets.emit(
-                                        'receiveQuestion',
-                                        currentQuestion
-                                    )
-                                    counter = 10
-                                    io.sockets.emit('receiveTimeLeft', counter)
-                                    interval = setInterval(timer, 1000)
-                                })
-                                .catch(err => {
-                                    console.log(err)
-                                })
-                        } else {
-                            isActiveServer = false
-                        }
+                        return Chat.create({
+                            message: `Correct answer: ${currentCorrectAnswer}`
+                        })
+                            .then(() => {
+                                io.sockets.emit('fetchChats')
+                                clearInterval(interval)
+                                if (connectedClients.length) {
+                                    Controller.getNewQuestion()
+                                        .then(result => {
+                                            currentQuestion = result
+                                            io.sockets.emit(
+                                                'receiveQuestion',
+                                                currentQuestion
+                                            )
+                                            counter = 10
+                                            io.sockets.emit(
+                                                'receiveTimeLeft',
+                                                counter
+                                            )
+                                            interval = setInterval(timer, 1000)
+                                        })
+                                        .catch(err => {
+                                            console.log(err)
+                                        })
+                                } else {
+                                    isActiveServer = false
+                                }
+                            })
+                            .catch(err => {
+                                console.log(err)
+                            })
                     }
                 }
                 let interval = setInterval(timer, 1000)
@@ -130,17 +138,9 @@ class Controller {
                         })
                 }
             })
-            socket.on('createCorrectAnswerMessage', correctAnswer => {
-                return Chat.create({
-                    message: `Correct answer: ${correctAnswer}`
-                })
-                    .then(() => {
-                        io.sockets.emit('fetchChats')
-                    })
-                    .catch(err => {
-                        console.log(err)
-                    })
-            })
+            // socket.on('createCorrectAnswerMessage', correctAnswer => {
+
+            // })
         })
     }
 
