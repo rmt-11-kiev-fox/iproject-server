@@ -91,8 +91,8 @@ class productController {
   }
 
   static async delete(req, res, next) {
-    console.log(req.user, "<<<user id");
-    console.log(req.params, "<<<params");
+    // console.log(req.user, "<<<user id");
+    // console.log(req.params, "<<<params");
     let id = +req.params.id;
     try {
       let delData = await Product.destroy({ where: { id } });
