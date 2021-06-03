@@ -1,4 +1,5 @@
 const { Income, Expense, Report } = require('../models')
+const axios = require('axios')
 
 class MoneyController {
 
@@ -216,6 +217,22 @@ class MoneyController {
       const updatedBalance = foundReport.total_income - updatedExpenses
       const updatedReport = await Report.update({ total_expenses: updatedExpenses, balance: updatedBalance }, { where: { UserId, period }, returning: true })
       res.status(200).json({ message: `Successfully deleted!` })
+    } catch (err) {
+      next(err)
+    }
+  }
+
+  static async getRecommendation (req, res, next) {    
+    try {
+      const showRecommendation = await axios({
+        method: 'GET',
+        url: 'https://apidojo-yahoo-finance-v1.p.rapidapi.com/auto-complete?q=telkom&region=ID',
+        headers: {
+          'x-rapidapi-key': '61fabb966amsh426c087344af6bep1cae0ajsn6ff385851ad1',
+          'x-rapidapi-host': 'apidojo-yahoo-finance-v1.p.rapidapi.com'
+        }
+      })
+      res.status(200).json(showRecommendation.data)
     } catch (err) {
       next(err)
     }
