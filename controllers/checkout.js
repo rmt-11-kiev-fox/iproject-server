@@ -5,7 +5,6 @@ module.exports = class Controller {
   static async createProduct(req, res, next) {
     const { email } = req.user
     const { name, amount, interval } = req.body.product
-    console.log(interval, "<<<<<");
     try {
       const newProduct = await stripe.products.create({ name });
       const priceInput = {
@@ -23,20 +22,14 @@ module.exports = class Controller {
         custId: customer.id,
         recurring: newPrice.recurring
       }
-      console.log(productData, "PORDUCTDATADFJKAFJKDASJFL");
       res.status(200).json(productData)
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 
-
-
-
   static async checkout(req, res, next) {
     const { priceId, recurring } = req.body
-    console.log(req.body, ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-
     try {
       const checkoutInput = {
         success_url: 'http://localhost:8080/checkout/success?id={CHECKOUT_SESSION_ID}',
@@ -48,23 +41,16 @@ module.exports = class Controller {
           quantity: 1
         }]
       }
-
       checkoutInput.mode = !recurring ? 'payment' : 'subscription'
-      console.log(checkoutInput);
-
       const session = await stripe.checkout.sessions.create(checkoutInput)
-      console.log(session, "<<<< ni cehckout");
       res.status(200).json(session)
-
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 
   static async checkoutSession(req, res, next) {
     const sessionId = req.query.id
-    console.log(sessionId);
-
     try {
       const lineItemsList = await stripe.checkout.sessions.listLineItems(
         sessionId,
@@ -74,7 +60,7 @@ module.exports = class Controller {
       const lineItemsData = lineItemsList.data[0]
       res.status(200).json(lineItemsData)
     } catch (err) {
-      console.log(err);
+      next(err)
     }
 
   }
@@ -84,24 +70,10 @@ module.exports = class Controller {
 
     try {
       const product = await stripe.products.retrieve(productId)
-      console.log(product)
       res.status(200).json(product)
     } catch (err) {
-      console.log(err);
+      next(err)
     }
   }
 
-  // static async checkoutSession(req, res, next) {
-  //   try {
-  //     const session = await stripe.checkout.sessions.retrieve(req.query.id, {
-  //       expand: ['line_items']
-  //     })
-  //     console.log(session);
-  //     res.status(200).json(session)
-
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-
-  // }
 }

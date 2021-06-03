@@ -13,8 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.hasMany(models.Donation, { foreignKey: 'UserId' })
-      User.hasMany(models.FavouriteOrganization, { foreignKey: 'UserId' })
-    }
+         }
   };
   User.init({
     firstName: {
@@ -58,26 +57,23 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           msg: "Password is required"
         },
-        isAlphanumeric: {
-          msg: "Password must be a minimum of .... ."
-        }
       }
     },
     phoneNumber: {
       type: DataTypes.STRING,
-      // validate: {
-      //   notEmpty: {
-      //     msg: "Phone Number is required"
-      //   },
-      // }
+      validate: {
+        notEmpty: {
+          msg: "Phone Number is required"
+        },
+      }
     },
     address: {
       type: DataTypes.STRING,
-      // validate: {
-      //   notEmpty: {
-      //     msg: "Address is required"
-      //   },
-      // }
+      validate: {
+        notEmpty: {
+          msg: "Address is required"
+        },
+      }
     },
   }, {
     hooks: {

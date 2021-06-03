@@ -2,19 +2,6 @@ const axios = require('axios')
 const userKey = process.env.USER_KEY
 
 module.exports = class Controller {
-	static async listCharities(req, res, next) {
-
-		axios({
-			method: 'GET',
-			url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}`
-		})
-			.then(({ data }) => {
-				res.status(200).json(data)
-			}).catch(err => {
-				console.log(err);
-			})
-	}
-
 	static async listCategories(req, res, next) {
 		try {
 			const categories = await axios({
@@ -40,22 +27,23 @@ module.exports = class Controller {
 		}
 	}
 
-	// static async organizationById(req, res, next) {
-	// 	const id = req.params.id
-	// 	console.log(id);
-	// 	try {
-	// 		const organizations = await axios({
-	// 			method: 'GET',
-	// 			url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&ein=${id}`
-	// 		})
-	// 		res.status(200).json(organizations.data.category)
+	static async organizationById(req, res, next) {
+		const id = req.params.id
+		console.log(id);
+		try {
+			const organizations = await axios({
+				method: 'GET',
+				url: `http://data.orghunter.com/v1/charitysearch?user_key=${userKey}&ein=${id}`
+			})
+			const organizationData = organizations.data.data[0]
+			res.status(200).json(organizationData)
 
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 		next(err)
-	// 	}
+		} catch (err) {
+			console.log(err);
+			next(err)
+		}
 
-	// }
+	}
 
 	static async searchOrganizations(req, res, next) {
 		const keyword = encodeURIComponent(req.query.keyword)
@@ -74,11 +62,4 @@ module.exports = class Controller {
 
 	}
 
-	static async payment(req, res, next) {
-		axios({
-			method: "POST",
-			url: `https://api.stripe.com/v1/payment_methods`
-		})
-
-	}
 }

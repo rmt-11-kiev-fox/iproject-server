@@ -29,7 +29,6 @@ module.exports = class Controller {
       !donations && next({ status: 404, msg: 'Donations Not Found' })
       res.status(201).json(donations)
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }
