@@ -41,6 +41,8 @@ class Controller {
                 socket.emit('receiveServerStatus', isActiveServer)
             })
             socket.on('getCurrentQuestion', () => {
+                console.log('MASUKKK<<<')
+                console.log(currentQuestion)
                 socket.emit('receiveQuestion', currentQuestion)
             })
             socket.on('startTrivia', () => {
@@ -60,7 +62,8 @@ class Controller {
                         clearInterval(interval)
                         if (connectedClients.length) {
                             Controller.getNewQuestion()
-                                .then(currentQuestion => {
+                                .then(result => {
+                                    currentQuestion = result
                                     io.sockets.emit(
                                         'receiveQuestion',
                                         currentQuestion
