@@ -7,11 +7,7 @@ router.get("/movies/popular", Controller.showPopularMovies);
 router.get("/movies/nowPlaying", Controller.showNowPlayingMovies);
 router.post("/movies/similar", Controller.showSimilarMovies);
 router.get("/movies/upcoming", Controller.showUpcomingMovies);
-router.get("/tv/popular", Controller.showPopularTv);
-router.get("/tv/OnTheAir", Controller.showOnTheAirTv);
-router.get("/tv/similar", Controller.showSimilarTv);
 router.get("/news/movies", Controller.showMovieNews);
-router.get("/news/tv", Controller.showTvNews);
 router.get("/movies/detail/:movieId", Controller.showMovieDetail);
 
 module.exports = router;
