@@ -5,6 +5,18 @@ const Booking = require('../models').Booking
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const sendMail = require('../helpers/send-mail')
+const axios = require('axios')
+let PIMCoordinate = `-6.2655,106.7843`
+let PSCoordinate = `-6.2255,106.7994`
+let MtgCoordinate = `-6.1964,106.8293`
+
+function geoAPI(coordinate) {
+    return `https://geocode.xyz/${coordinate}?json=1`
+}
+
+function weatherAPI(coordinate) {
+    return `https://api.tomorrow.io/v4/timelines?location=${coordinate}&fields=temperature&timesteps=1h&units=metric&apikey=ZEel7hbLIKJaaNhZpQN3rM5eYxslALBO`
+}
 
 class BcryptPassword{
     static hashPassword(pass){
@@ -146,6 +158,96 @@ router.delete('/bookings/:id', authentication, (req, res, next)=>{
         res.status(500).json({
             message: 'internal error'
         })
+    })
+})
+
+router.get('/locationPIM', (req, res, next)=>{
+    axios.get(geoAPI(PIMCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {coordinatePIM: {
+                lat: result.data.inlatt,
+                lng: result.data.inlongt
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.get('/locationPS', (req, res, next)=>{
+    axios.get(geoAPI(PSCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {coordinatePS: {
+                lat: result.data.inlatt,
+                lng: result.data.inlongt
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.get('/locationMtg', (req, res, next)=>{
+    axios.get(geoAPI(MtgCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {coordinateMtg: {
+                lat: result.data.inlatt,
+                lng: result.data.inlongt
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.get('/weatherPIM', (req, res, next)=>{
+    axios.get(weatherAPI(PIMCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {weather: {
+                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
+                dinner: result.data.data.timelines[0].intervals[16].values.temperature
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.get('/weatherPS', (req, res, next)=>{
+    axios.get(weatherAPI(PSCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {weather: {
+                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
+                dinner: result.data.data.timelines[0].intervals[16].values.temperature
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+})
+
+router.get('/weatherMtg', (req, res, next)=>{
+    axios.get(weatherAPI(MtgCoordinate))
+    .then(result=>{
+        res.status(200).json(
+            {weather: {
+                lunch: result.data.data.timelines[0].intervals[9].values.temperature,
+                dinner: result.data.data.timelines[0].intervals[16].values.temperature
+            }
+        })
+    })
+    .catch(err=>{
+        console.log(err);
     })
 })
 
