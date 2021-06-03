@@ -29,7 +29,7 @@ class FavouriteController {
     }
 
     static deleteFav (req, res, next) {
-        const idToDelete = +req.body.idToDelete
+        const idToDelete = +req.params.favouriteId
         Favourite.destroy({ where: { id: idToDelete } })
             .then((data) => {
                 if (data) {
