@@ -1,6 +1,7 @@
 const {User, Collect} = require('../models')
 const {comparePass} = require('../helpers/bcrypt')
 const {generateToken} = require('../helpers/jwt')
+const nodemailer = require('nodemailer')
 
 class Controller {
     static register(req, res, next) {
@@ -50,6 +51,33 @@ class Controller {
         })
         .then(data => {
             res.status(201).json(data)
+
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: req.loggedUser.email,
+                    pass: 'tes123456'
+                }
+            })
+
+            const options = {
+                from: req.loggedUser.email,
+                to: 'indharamerta@gmail.com',
+                subject: 'New Collect Request For Better World',
+                text: `<h3>Please Reply This Message For Confirmation</h3><br>
+                Name: ${data.name}<br>
+                Address: ${data.address}<br>
+                Collect Date: ${data.date}<br>
+                Notes: ${data.notes}`
+            }
+
+            transporter.sendEmail(options, (err, info) => {
+                if(err) {
+                    console.log(err)
+                    return
+                } 
+                console.log('Sent: ' + info.response)
+            })
         })
         .catch(err => {
             if(err.name === 'SequelizeValidationError') {
