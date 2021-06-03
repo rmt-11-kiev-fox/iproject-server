@@ -29,7 +29,7 @@ module.exports = class Controller {
 
 	static async organizationById(req, res, next) {
 		const id = req.params.id
-		console.log(id);
+		
 		try {
 			const organizations = await axios({
 				method: 'GET',
@@ -39,7 +39,6 @@ module.exports = class Controller {
 			res.status(200).json(organizationData)
 
 		} catch (err) {
-			console.log(err);
 			next(err)
 		}
 
