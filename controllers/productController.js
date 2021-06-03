@@ -1,6 +1,12 @@
-const { Product, Category, Like, BidList } = require('../models')
+const { Product, Category, Like, BidList } = require('../models');
+const product = require('../routes/product');
+// const io = require('../')
 
 class productController {
+  // constructor(io) {
+  //   this.io = io
+  // }
+ 
   // fetch product can both
   static fetchProduct(req, res, next){
     console.log('gamasuk');
@@ -50,7 +56,12 @@ class productController {
   // find product by id can both
   static findProduct(req, res, next){
     let { id } = req.params
-    Product.findByPk(id)
+    Product.findOne({
+      where: {id},
+      include:{
+        model: Category,
+        attributes:['name']
+      }})
     .then((data) => {
       res.status(200).json(data)
     })
@@ -171,38 +182,58 @@ class productController {
     }
   }
   // join bid can both with auth
-  joinBidAuction(req, res, next){
+  static async joinBidAuction(req, res, next){
+    const io = req.app.get('io');
     let money_offer = req.body.money_offer
     let user_id = req.currentUser.id
     let product_id = req.body.product_id
     let action = ""
-    BidList.findOne({where: {user_id: user_id}})
-    .then((data) => {
-      if (!data){
+    try {
+      const check = await BidList.findOne({where: {user_id: user_id}, })
+      if(check && money_offer <= check.money_offer){
+        action = "sorry, u can't put your offer with the same or less than before"
+      } else {
         action = 'success add your offer'
-        return BidList.create({
+         const newBid = await BidList.create({
           user_id: user_id,
           product_id: product_id,
           money_offer: money_offer
         })
-      } else {
-        if(money_offer <= data.money_offer){
-          action = "sorry, u can't put your offer with the same or less than before"
-        } else {
-          return BidList.update({
-            product_id: product_id,
-            money_offer: money_offer
-          }, {where: {user_id: user_id}})
-        }
+        const product = await Product.findByPk(newBid.product_id);
+         const updated = await product.update({currentPrice: newBid.money_offer});
+         console.log(updated)
+        // update product currentPrice amount
+        console.log('pid',newBid.product_id)
+        io.emit(`addBid-${newBid.product_id}`, updated)
       }
-    })
-    .catch((err) => {
+      return res.status(201).json(action)
+    } catch (err) {
       console.log(err);
       next(err)
-    })
+    }     
+  }
+  static async getHistoryOfBiding(req, res, next){
+    const user_id = req.currentUser.id
+
+    try {
+      const history = await BidList.findAll({
+        where: {id: user_id}, 
+        include: Product
+      })
+
+    } catch (err) {
+      
+    }
+  }
+
+  static findBidByProduct(req, res, next){
+    
   }
 }
 
-
-
 module.exports = productController
+
+// module.exports = function (io) {
+//   productController =  new productController(io)
+//   console.log(productController)
+// }
