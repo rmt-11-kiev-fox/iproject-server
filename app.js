@@ -100,6 +100,7 @@ io.on("connection", (socket) => {
             songQueue: [],
             currentSongDuration: 0,
             currentSongAt: 0,
+            roomChat: [],
         };
         lobbyData.rooms.push(roomObject);
         io.emit("updateData", lobbyData);
@@ -115,7 +116,7 @@ io.on("connection", (socket) => {
             console.log("masuk room index");
             lobbyData.rooms[roomIndex] = val;
         }
-        // socket.join(val.roomId, () => {
+        // socket.join(val.roomId, (y) => {
         //     io.sockets
         //         .in(val.roomId)
         //         .emit("roomData", lobbyData.rooms[roomIndex]);
