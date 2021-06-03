@@ -24,6 +24,7 @@ class CurrentData {
                 city: dataGeo.data.city,
                 flag: dataGeo.data.flag.png,
             };
+            console.log(dataGeo);
             const weatherApi = await axios({
                 url: `${weatherUrl}${dataLocation.city}&appid=${apiKeyWeatherUrl}`,
             });
