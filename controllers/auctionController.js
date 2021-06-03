@@ -42,7 +42,7 @@ class AuctionController {
     } catch (error) {
       console.log(error);
       next({
-        name: "Get Product Failed",
+        name: "Create Auction Failed",
         code: 500,
         message: "Internal Server Error",
       });
@@ -61,7 +61,7 @@ class AuctionController {
       res.status(200).json(getData);
     } catch (error) {
       next({
-        name: "Get Product Failed",
+        name: "Get Auction Failed",
         code: 500,
         message: "Internal Server Error",
       });
