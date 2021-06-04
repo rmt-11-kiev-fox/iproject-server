@@ -9,13 +9,14 @@ const axios = require('axios')
 let PIMCoordinate = { lat:-6.2655, long: 106.7843}
 let PSCoordinate = {lat:-6.2255, long: 106.7994}
 let MtgCoordinate = {lat: -6.1964, long: 106.8293}
+let APIKey = process.env.APIKey
 
 function geoAPI(coordinate) {
     return `https://geocode.xyz/${coordinate.lat},${coordinate.long}?json=1`
 }
 
 function weatherAPI(coordinate) {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=332c23ca490b82d8dbb2befc4f007ff3`
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=${APIKey}`
 }
 
 class BcryptPassword{
@@ -134,10 +135,10 @@ router.put('/bookings/:id', authentication, (req, res, next)=>{
         returning: true
     })
     .then(result=>{
-        res.status(201).json({booking:result[1]})
+        res.status(200).json({booking:result[1]})
     })
     .catch(err=>{
-        console.log(err);
+        // console.log(err);
         res.status(500).json({
             message: 'internal error'
         })
@@ -154,7 +155,7 @@ router.delete('/bookings/:id', authentication, (req, res, next)=>{
         res.status(201).json({message:'delete success'})
     })
     .catch(err=>{
-        console.log(err);
+        // console.log(err);
         res.status(500).json({
             message: 'internal error'
         })
