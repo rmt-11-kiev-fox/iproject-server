@@ -4,7 +4,7 @@ const { Product, Category, Like, BidList } = require('./models');
 
 class Tasks {
   static closeBid (io) {
-    return cron.schedule('*/1 * * * * *', async () =>  {
+    return cron.schedule('*/1 * * * *', async () =>  {
       const products = await Product.findAll({where: {status: 'available'}})
       // console.log(io, 'io');
       console.log('product', products.length)
