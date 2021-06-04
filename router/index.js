@@ -6,6 +6,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const sendMail = require('../helpers/send-mail')
 const axios = require('axios')
+let APIKey = process.env.APIKey
 let PIMCoordinate = { lat:-6.2655, long: 106.7843}
 let PSCoordinate = {lat:-6.2255, long: 106.7994}
 let MtgCoordinate = {lat: -6.1964, long: 106.8293}
@@ -15,7 +16,7 @@ function geoAPI(coordinate) {
 }
 
 function weatherAPI(coordinate) {
-    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=332c23ca490b82d8dbb2befc4f007ff3`
+    return `https://api.openweathermap.org/data/2.5/weather?lat=${coordinate.lat}&lon=${coordinate.long}&appid=${APIKey}}`
 }
 
 class BcryptPassword{
