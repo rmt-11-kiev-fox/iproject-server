@@ -9,17 +9,27 @@ Ted's Cinema App is an application to show you what newest movie right now. This
 ## Endpoint List
 - POST /register
 - POST /login
-- POST /googlelogin
-- GET /nowPlayings
+- POST /googleLogin
 - GET /comingSoons
+- GET /nowPlayings
 - GET /cinemas
 - GET /nameSearch
+- POST /watchLists
+- GET /watchLists
+- DELETE /watchLists
+
+&nbsp;
 
 ### POST /register
 
 > Create new User
 
 _Request Header_
+```
+not needed
+```
+
+_Request Params_
 ```
 not needed
 ```
@@ -66,6 +76,11 @@ _Request Header_
 not needed
 ```
 
+_Request Params_
+```
+not needed
+```
+
 _Request Body_
 ```
 {
@@ -107,6 +122,11 @@ _Request Header_
 not needed
 ```
 
+_Request Params_
+```
+not needed
+```
+
 _Request Body_
 ```
 {
@@ -117,16 +137,16 @@ _Request Body_
 _Response (200 - OK)_
 ```
 {
-    "id": <Your ID>,
-    "email": <Your email>,
+    "username": <Your Username>,
+    "access_token": <Your access token>
 }
 ```
 
 _Response (201 - CREATED)_
 ```
 {
-    "id": <Your new ID>,
-    "email": <Your email>,
+    "username": <Your Username>,
+    "access_token": <Your access token>
 }
 ```
 
@@ -187,6 +207,11 @@ _Request Header_
 {
   "access_token": "<your access token>"
 }
+```
+
+_Request Params_
+```
+not needed
 ```
 
 _Request Body_
@@ -271,6 +296,11 @@ _Request Header_
 {
   "access_token": "<your access token>"
 }
+```
+
+_Request Params_
+```
+not needed
 ```
 
 _Request Query_
@@ -416,6 +446,44 @@ _Response (200 - OK)_
         "UserId": 1
     }
 ]
+```
+
+_Response (500 - Internal Server Error)_
+```
+{
+  "message": "Internal Server Error"
+}
+```
+---
+
+### Delete /watchLists
+
+> Delete task by id
+
+_Request Header_
+```
+{
+  "access_token": "<your access token>"
+}
+```
+
+_Request Params_
+```
+not needed
+```
+
+_Request Body_
+```
+{
+  "WatchlistId": <Your Watchlist ID>
+}
+```
+
+_Response (200 - OK)_
+```
+{
+    "message": "Watchlist deleted successfully"
+}
 ```
 
 _Response (500 - Internal Server Error)_
