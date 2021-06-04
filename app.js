@@ -3,7 +3,7 @@ if (process.env.NODE_ENV !== 'production'){
 }
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT
 const cors = require('cors')
 const errorHandler = require('./middlewares/errorHandler')
 
@@ -30,7 +30,7 @@ app.use(router)
 app.use(errorHandler)
 app.set('io', io)
 
-httpServer.listen(3000)
+httpServer.listen(port)
 // app.listen(port, () => {
 //   console.log(`Bismillah tugas terakhir!! http://localhost:${port}`)
 // })
