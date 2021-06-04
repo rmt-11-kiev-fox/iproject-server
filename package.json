@@ -1,0 +1,38 @@
+{
+  "name": "iproject-server",
+  "version": "1.0.0",
+  "description": "API server for Individual Project",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx nodemon app",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rmt-11-kiev-fox/iproject-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rmt-11-kiev-fox/iproject-server/issues"
+  },
+  "homepage": "https://github.com/rmt-11-kiev-fox/iproject-server#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "generate-password": "^1.6.0",
+    "google-auth-library": "^7.1.0",
+    "jsonwebtoken": "^8.5.1",
+    "nodemon": "^2.0.7",
+    "pg": "^8.6.0",
+    "sequelize": "^6.6.2",
+    "stripe": "^8.150.0"
+  },
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "sequelize-cli": "^6.2.0"
+  }
+}
