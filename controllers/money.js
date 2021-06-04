@@ -49,7 +49,7 @@ class MoneyController {
         throw ({ status: 400, message: `Please input your income first!` })
       } else {
         if (foundReport.total_income < amount) {
-          throw ({ status: 400, message: `Your expense shouldn't be higher than your income!` })
+          throw ({ status: 400, message: `Your expenses shouldn't be higher than your income!` })
         } else {
           const expense = await Expense.create({ category, description, amount, period, UserId })
           const money = new Number(expense.amount).toLocaleString("id-ID")
@@ -84,7 +84,7 @@ class MoneyController {
   }
 
   static async showMonthlyIncomes (req, res, next) {
-    const { period } = req.body
+    const period = req.params.period
     try {
       const monthlyIncomes = await Income.findAll({ where: { period }, order: [['createdAt', 'ASC']] })
       if (!monthlyIncomes) {
@@ -98,7 +98,7 @@ class MoneyController {
   }
 
   static async showMonthlyExpenses (req, res, next) {
-    const { period } = req.body
+    const period = req.params.period
     try {
       const monthlyExpenses = await Expense.findAll({ where: { period }, order: [['createdAt', 'ASC']] })
       if (!monthlyExpenses) {
@@ -112,11 +112,22 @@ class MoneyController {
   }
 
   static async showReports (req, res, next) {
-    const { period } = req.body
+    const period = req.params.period
     const UserId = +req.currentUser.id
     try {
       const showReports = await Report.findOne({ where: { UserId, period } })
       res.status(200).json(showReports)
+    } catch (err) {
+      console.log(err)
+      next(err)
+    }
+  }
+
+  static async getInc (req, res, next) {
+    const id = +req.params.id
+    try {
+      const foundInc = await Income.findOne({ where: { id }})
+      res.status(200).json(foundInc)
     } catch (err) {
       next(err)
     }
@@ -172,13 +183,22 @@ class MoneyController {
     }
   }
 
+  static async getExp (req, res, next) {
+    const id = +req.params.id
+    try {
+      const foundExp = await Expense.findOne({ where: { id }})
+      res.status(200).json(foundExp)
+    } catch (err) {
+      next(err)
+    }
+  }
+
   static async editExpenses (req, res, next) {
-    const UserId = +req.currentUser.id
     const id = +req.params.id
     const { category, description } = req.body
     try {
-      const editExpenses = await Expense.update({ category, description }, { where: { id, UserId } })
-      res.status(200).json({ message: `Category and Description successfully changed!` })
+      const editExpenses = await Expense.update({ category, description }, { where: { id } })
+      res.status(200).json({ message: `Category and Description successfully changed!, ${editExpenses}` })
     } catch (err) {
       next(err)
     }
@@ -211,7 +231,7 @@ class MoneyController {
       const beforeDelete = await Expense.findByPk(id)
       const period = beforeDelete.period
       const currentAmount = beforeDelete.amount
-      const deleteIncome = await Expense.destroy({ where: { id } })
+      const deleteExpense = await Expense.destroy({ where: { id } })
       const foundReport = await Report.findOne({ where: { UserId, period } })
       const updatedExpenses = foundReport.total_expenses - currentAmount
       const updatedBalance = foundReport.total_income - updatedExpenses
