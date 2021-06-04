@@ -51,7 +51,7 @@ async function authorizationExpenses (req, res, next) {
     if (!foundExpenses) {
       throw ({ status: 404, message: `Request not found!` })
     } else {
-      if (foundIncome.UserId !== UserId) {
+      if (foundExpenses.UserId !== UserId) {
         throw ({ status: 401, message: `Unauthorized request!` })
       } else {
         next()
