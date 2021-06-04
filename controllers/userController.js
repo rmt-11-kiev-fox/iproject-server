@@ -47,8 +47,8 @@ class Controller {
         try {
             const foundUsers = await User.findAll({
                 attributes: { exclude: ['password'] },
-                order: [['point', 'DESC']],
-                limit: 15
+                order: [['point', 'DESC']]
+                // limit: 15
             })
             res.status(200).json(foundUsers)
         } catch (err) {
