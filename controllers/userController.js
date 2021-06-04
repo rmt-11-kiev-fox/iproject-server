@@ -56,6 +56,57 @@ class userController {
     }
   }
 
+  // static async changeSetting (req, res, next) {
+  //   try {
+  //     const id = req.params.id
+
+  //     const newData = {
+  //       birthDate: req.body.birthDate,
+  //       gender: req.body.gender,
+  //       weight: req.body.weight,
+  //       height: req.body.height
+  //     }
+
+  //     const newUserData = await User.update(newData, { where: { id: id }})
+  //     res.status(200).json(newUserData)
+  //     console.log('--------------------------------', newUserData ,'------------------------------------------');
+
+  //   } catch (error) {
+  //     console.log(error);
+  //     // res.send(error) // ingat hapus boss
+    
+  //     let listOfErrors = []
+  //     let errorName = 'ServerError'
+  //     let errorCode = 500
+
+  //     if (error.name == 'SequelizeUniqueConstraintError') {
+  //       errorName = "SequelizeUniqueConstraintError"
+  //       errorCode = 400
+
+  //       if (error.errors[0].message == 'userName must be unique') {
+  //         listOfErrors.push(`User Name already exist`)
+  //       }
+  //       else if (error.errors[0].message == 'email must be unique') {
+  //         listOfErrors.push(`Email already exist`)
+  //       }
+  //     }
+  //     else if (error.name == 'SequelizeValidationError') {
+  //       errorName = "SequelizeValidationError"
+  //       listOfErrors.push(error.errors[0].message)
+  //       errorCode = 400
+  //     }
+  //     else {
+  //       listOfErrors = error
+  //     }
+
+  //     next({
+  //       name: errorName,
+  //       msg: listOfErrors,
+  //       code: errorCode
+  //     }) 
+  //   }
+  // }
+
   static async login(req, res, next) {
     try {
       const { userName, email, password } = req.body

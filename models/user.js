@@ -63,7 +63,22 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    height: DataTypes.INTEGER
+    height: {
+      type: DataTypes.INTEGER,
+      validate: {
+        notEmpty: {
+          msg: `Height must not be empty`
+        },
+        min: {
+          args: [60],
+          msg: `Height must not be less than 60 cm`
+        },
+        max: {
+          args: [300],
+          msg: `Height must not be 300 cm or up`
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'User',

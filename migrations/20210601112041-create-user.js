@@ -35,6 +35,7 @@ module.exports = {
       },
       height: {
         type: Sequelize.INTEGER,
+        allowNull: false
       },
       createdAt: {
         allowNull: false,

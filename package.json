@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Jho9595/iproject-server#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "ejs": "^3.1.6",
