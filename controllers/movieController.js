@@ -41,7 +41,11 @@ class MovieController {
             .then(cinemas => {
                 // console.log(cinemas.data.result.hasil);
                 let response = cinemas.data.result.hasil
-                res.status(200).json(response)
+                let newResponse = []
+                for (let i = 0; i < 12; i++) {
+                    newResponse.push(response[i])
+                }
+                res.status(200).json(newResponse)
             })
             .catch(err => {
                 console.log(err);

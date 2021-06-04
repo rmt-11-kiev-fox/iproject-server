@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.post('/register', UserController.register)
 router.post('/login', UserController.login)
+router.post('/googleLogin', UserController.googleLogin)
 
 router.use(authentication)
 router.get('/comingSoons', MovieController.fetchComingSoonMovie)

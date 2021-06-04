@@ -46,8 +46,10 @@ module.exports = (sequelize, DataTypes) => {
     hooks: {
       beforeCreate: (user, option) => {
         user.password = hash(user.password)
-        if (user.username.length === 0) {
+        if (user.username === undefined) {
+          console.log(user.email,'<<<<<ini di hooks user email');
           user.username = user.email.split('@')[0]
+          console.log(user.username, 'ini usernam di hooks');
         }
       }
     }
