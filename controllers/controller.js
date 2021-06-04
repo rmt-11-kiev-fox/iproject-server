@@ -50,34 +50,35 @@ class Controller {
             UserId: req.loggedUser.id
         })
         .then(data => {
-            res.status(201).json(data)
-
             const transporter = nodemailer.createTransport({
-                service: 'gmail',
+                host: 'smtp.ethereal.email',
+                port: 587,
                 auth: {
-                    user: req.loggedUser.email,
-                    pass: 'tes123456'
+                    user: 'denis.hane@ethereal.email',
+                    pass: 'xKPMzgjBpgXQG5UZxt'
                 }
-            })
+            });
 
             const options = {
                 from: req.loggedUser.email,
-                to: 'indharamerta@gmail.com',
+                to: 'indhara.amerta@gmail.com',
                 subject: 'New Collect Request For Better World',
-                text: `<h3>Please Reply This Message For Confirmation</h3><br>
+                html: `<h3>Please Reply This Message For Confirmation</h3><br>
                 Name: ${data.name}<br>
                 Address: ${data.address}<br>
                 Collect Date: ${data.date}<br>
                 Notes: ${data.notes}`
             }
 
-            transporter.sendEmail(options, (err, info) => {
+            transporter.sendMail(options, (err, info) => {
                 if(err) {
                     console.log(err)
                     return
                 } 
                 console.log('Sent: ' + info.response)
             })
+
+            res.status(201).json(data)
         })
         .catch(err => {
             if(err.name === 'SequelizeValidationError') {
